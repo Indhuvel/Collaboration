@@ -11,31 +11,26 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Entity
-@Table(name ="mychat")
-public class Mychat {
+@Table(name ="commentform")
+public class Comment {
 
 	@Id
 	@GeneratedValue
-	private int chatid;
-	private String sender;
-	private String receiver;
-	private String message;
+	private int commentid;
 	
-	
-	
-    private int blogid;
+	private int blogid;
     private String username;
     private int userid;
     private int forumid;
     private Date commentdate;
     private String usercomment;
-	
     
-    public int getChatid() {
-		return chatid;
+	
+	public int getCommentid() {
+		return commentid;
 	}
-	public void setChatid(int chatid) {
-		this.chatid = chatid;
+	public void setCommentid(int commentid) {
+		this.commentid = commentid;
 	}
 	public int getBlogid() {
 		return blogid;
@@ -49,7 +44,6 @@ public class Mychat {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
 	public int getUserid() {
 		return userid;
 	}
@@ -68,31 +62,12 @@ public class Mychat {
 	public void setCommentdate(Date commentdate) {
 		this.commentdate = commentdate;
 	}
-	
 	public String getUsercomment() {
 		return usercomment;
 	}
 	public void setUsercomment(String usercomment) {
 		this.usercomment = usercomment;
 	}
-	public String getSender() {
-		return sender;
-	}
-	public void setSender(String sender) {
-		this.sender = sender;
-	}
-	public String getReceiver() {
-		return receiver;
-	}
-	public void setReceiver(String receiver) {
-		this.receiver = receiver;
-	}
-	public String getMessage() {
-		return message;
-	}
-	public void setMessage(String message) {
-		this.message = message;
-	}
 	
-	
+
 }

@@ -1,43 +1,41 @@
 package com.niit.collaborationback;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.niit.collaboration.dao.ForumDAO;
-import com.niit.collaboration.model.Forum;
+import com.niit.collaboration.dao.CommentDAO;
+import com.niit.collaboration.model.Comment;
 
-public class ForumDAOTestCase {
+public class CommentDAOTestCase {
 	@Autowired
 	static AnnotationConfigApplicationContext context;
 
 	@Autowired
-	static ForumDAO forumDAO;
+	static CommentDAO commentDAO;
 
 	@Autowired
-	static Forum forum;
-
+	static Comment comment;
+	
 	@BeforeClass
 	public static void initialize() {
 		context = new AnnotationConfigApplicationContext();
 		context.scan("com.niit.collaboration");
 		context.refresh();
 
-		// get the userDAO from context
-		forumDAO = (ForumDAO) context.getBean("ForumDAO");
+		
+		commentDAO = (CommentDAO) context.getBean("CommentDAO");
 
-		forum = (Forum) context.getBean("forum");
+		comment = (Comment) context.getBean("comment");
 	}
-
 	@Test
-	public void createForumTestCase() {
+	public void createCommentTestCase() {
 
-		forum.setForumname("Discussion board");
-	  	forum.setStatus("college system will change");
-	  	forum.setForumcontent("content");
-	  	forumDAO.saveOrUpdate(forum);
+		comment.setUsername("jenu");
+		comment.setUsercomment("cmt");
+		
+		commentDAO.saveOrUpdate(comment);
+		
 
 	}
-
 }

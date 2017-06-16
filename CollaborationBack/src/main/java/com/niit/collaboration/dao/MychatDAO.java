@@ -8,9 +8,13 @@ public interface MychatDAO {
 	
 	public List<Mychat>list();
 
-	public boolean saveOrUpdate(Mychat mychat);
+	public Mychat saveOrUpdate(Mychat mychat);
 	
     public void delete (int mychatId);
 	
-	public Mychat getByMychatid(int mychatId);
+	public Mychat getByMychatid(int mychatid);
+
+	public Mychat getAllMychat(int mychatid);
+
+	public void insert(Mychat mychat);
 }

@@ -20,6 +20,7 @@ public class Forum {
 	@GeneratedValue
 	private int forumid;
 	private String forumname;
+	private String forumcontent;
 	private int userid;
 	private Date createdate;
 	private String status;
@@ -53,6 +54,12 @@ public class Forum {
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	public String getForumcontent() {
+		return forumcontent;
+	}
+	public void setForumcontent(String forumcontent) {
+		this.forumcontent = forumcontent;
 	}
 	
 	

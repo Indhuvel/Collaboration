@@ -30,17 +30,16 @@ public class UserDAOImpl implements UserDAO{
 		return listUser;
 	}
 
-
-	@Transactional
-	public boolean saveOrUpdate(User user) {
-		try
-		{
+	@Transactional	
+	public User create(User user) {
+		// TODO Auto-generated method stub
 		sessionFactory.getCurrentSession().saveOrUpdate(user);
-		}catch (Exception e) {
-						e.printStackTrace();
-			return false;
-		}
-		return true;
+		return user;
+	}
+	@Transactional
+	public User saveOrUpdate(User user) {
+		sessionFactory.getCurrentSession().saveOrUpdate(user);
+		return user;
 	}
 
 	@Transactional
@@ -51,8 +50,9 @@ public class UserDAOImpl implements UserDAO{
 	}
 
 	@Transactional
-	public User getByUserId(int userId) {
-		String hql = "from userinfo where userid ='" + userId + "'";
+	public User getByUserId(int userid) {
+		
+		String hql = "from User where userid ='" + userid + "'";
 		Query query = (Query) sessionFactory.getCurrentSession().createQuery(hql);
 		@SuppressWarnings("unchecked")
 		List<User> listUser = (List<User>) (query).list();
@@ -66,7 +66,7 @@ public class UserDAOImpl implements UserDAO{
 
 	@Transactional
 	public User getByMail(String mail) {
-		String hql = "from userinfo where mailid ='" + mail + "'";
+		String hql = "from User where email ='" + mail + "'";
 		Query query = (Query) sessionFactory.getCurrentSession().createQuery(hql);
 		@SuppressWarnings("unchecked")
 		List<User> listUser = (List<User>) (query).list();
@@ -76,14 +76,18 @@ public class UserDAOImpl implements UserDAO{
 		}
 		return null;
 	}
-
+	@Transactional
+	public User get(String empID) {
+		User user = (User) sessionFactory.getCurrentSession().get(User.class, empID);
+		return user;
+	}
 	
 
 	@Transactional
 	public User login(User user) {
 		System.out.println(user.getEmail());
 		System.out.println(user.getPassword());
-		String hql = "from User where mail=" + "'" + user.getEmail() + "'   and password = " + "'"+ user.getPassword() +"'";
+		String hql = "from User where email=" + "'" + user.getEmail() + "'   and password = " + "'"+ user.getPassword() +"'";
 	
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 

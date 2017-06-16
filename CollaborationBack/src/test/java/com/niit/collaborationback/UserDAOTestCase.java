@@ -43,8 +43,8 @@ public class UserDAOTestCase {
 		user.setEmail("jenu@gmail.com");
 		user.setAddress("Kerala");
 		user.setRole("Student");
-	boolean flag=userDAO.saveOrUpdate(user);
-	System.out.println(flag);
+	userDAO.saveOrUpdate(user);
+	
 
 
 	}

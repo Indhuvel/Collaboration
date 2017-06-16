@@ -14,18 +14,21 @@ import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.niit.collaboration.dao.BlogDAO;
+import com.niit.collaboration.dao.CommentDAO;
 import com.niit.collaboration.dao.ForumDAO;
 import com.niit.collaboration.dao.FriendDAO;
 import com.niit.collaboration.dao.JobDAO;
 import com.niit.collaboration.dao.MychatDAO;
 import com.niit.collaboration.dao.UserDAO;
 import com.niit.collaboration.daoimp.BlogDAOImpl;
+import com.niit.collaboration.daoimp.CommentDAOImpl;
 import com.niit.collaboration.daoimp.ForumDAOImpl;
 import com.niit.collaboration.daoimp.FriendDAOImpl;
 import com.niit.collaboration.daoimp.JobDAOImpl;
 import com.niit.collaboration.daoimp.MychatDAOImpl;
 import com.niit.collaboration.daoimp.UserDAOImpl;
 import com.niit.collaboration.model.Blog;
+import com.niit.collaboration.model.Comment;
 import com.niit.collaboration.model.Forum;
 import com.niit.collaboration.model.Friend;
 import com.niit.collaboration.model.Job;
@@ -33,7 +36,7 @@ import com.niit.collaboration.model.Mychat;
 import com.niit.collaboration.model.User;
 
 @Configuration
-@ComponentScan("com.niit.*")
+@ComponentScan("com.niit.collaboration")
 @EnableTransactionManagement
 public class ApplicationContextConfig {
 	
@@ -76,6 +79,7 @@ public class ApplicationContextConfig {
 		sessionBuilder.addAnnotatedClass(Job.class);
 		sessionBuilder.addAnnotatedClass(Friend.class);
 		sessionBuilder.addAnnotatedClass(Mychat.class);
+		sessionBuilder.addAnnotatedClass(Comment.class);
 
 
 		return sessionBuilder.buildSessionFactory();
@@ -123,5 +127,9 @@ public class ApplicationContextConfig {
 	public MychatDAO getMychatDAO(SessionFactory sessionFactory) {
 		return new MychatDAOImpl(sessionFactory);
 	}
-
+	@Autowired(required = true)
+	@Bean(name = "CommentDAO")
+	public CommentDAO getCommentDAO(SessionFactory sessionFactory) {
+		return new CommentDAOImpl(sessionFactory);
+	}
 }

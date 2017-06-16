@@ -6,13 +6,17 @@ import com.niit.collaboration.model.Blog;
 
 public interface BlogDAO {
 	
-	public List<Blog>list();
+	public List<Blog> list();
 
-	public boolean saveOrUpdate(Blog blog);
+	public Blog saveOrUpdate(Blog blog);
 	
 	public void delete (int blogId);
-	
+	  
 	public Blog getById(int blogId);
 	
 	public Blog getByTitle(String title);
+
+	public void insert(Blog blog);
+
+	public Blog getAllBlog(int blogid);
 }

@@ -38,9 +38,9 @@ public class BlogDAOTestCase {
 	    blog.setStatus("active");
 	    blog.setLikes(1);
 	    blog.setBlogname("java");
-	    
-	    boolean flag= blogDAO.saveOrUpdate(blog);
-		System.out.println(flag);
+	    blog.setUserid(2);
+	   
+	    blogDAO.saveOrUpdate(blog);
 
 
 	}

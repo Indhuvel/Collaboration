@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -24,20 +26,15 @@ public class BlogDAOImpl implements BlogDAO  {
 	@Transactional
 	public List<Blog> list() {
 		@SuppressWarnings("unchecked")
-		List<Blog> listBlog = sessionFactory.getCurrentSession().createQuery("from Blog").list();
+		List<Blog> listBlog = (List<Blog>)sessionFactory.getCurrentSession().createCriteria(Blog.class)
+		 .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 		return listBlog;
 	}
 	@Transactional
-	public boolean saveOrUpdate(Blog blog) {
-		try
-		{
-		sessionFactory.getCurrentSession().saveOrUpdate(blog);
-		}catch (Exception e) {
-						e.printStackTrace();
-			return false;
-		}
-		return true;
+	public Blog saveOrUpdate(Blog blog) {
 		
+		sessionFactory.getCurrentSession().saveOrUpdate(blog);
+		return blog;
 	}
 
 	@Transactional
@@ -57,6 +54,25 @@ public class BlogDAOImpl implements BlogDAO  {
 		Blog Title = (Blog) sessionFactory.getCurrentSession().get(Blog.class,title);
 
 		return Title;
+	}
+
+	@Transactional
+	public void insert(Blog blog) {
+		sessionFactory.getCurrentSession().saveOrUpdate(blog);
+	}
+	@Transactional
+	public Blog getAllBlog(int blogid) {
+		
+		String hql = "from Blog where blogid ='" + blogid + "'";
+		Query query = (Query) sessionFactory.getCurrentSession().createQuery(hql);
+		@SuppressWarnings("unchecked")
+		List<Blog> listBlog = (List<Blog>) (query).list();
+
+		if (listBlog != null && !listBlog.isEmpty()) {
+			return listBlog.get(0);
+		}
+		return null;
+  
 	}
 	
 }

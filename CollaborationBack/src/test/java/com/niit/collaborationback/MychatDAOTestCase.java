@@ -38,8 +38,7 @@ public class MychatDAOTestCase {
 		mychat.setUserid(51);
 		mychat.setForumid(99);
 		
-		boolean flag=mychatDAO.saveOrUpdate(mychat);
-		System.out.println(flag);
+		mychatDAO.saveOrUpdate(mychat);
 
 	}
   }
