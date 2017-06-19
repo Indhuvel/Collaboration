@@ -1,5 +1,6 @@
 package com.niit.collaboration.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.niit.collaboration.dao.CommentDAO;
 import com.niit.collaboration.model.Comment;
-import com.niit.collaboration.model.User;
 
 @RestController
 public class CommentController {
@@ -37,7 +37,7 @@ public class CommentController {
 		return new ResponseEntity<List<Comment>>(listcomment, HttpStatus.OK);
 	}
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@GetMapping("/comments/{commentid}")
 	public ResponseEntity getByComment(@PathVariable("commentid") int commentid) {
 
@@ -49,16 +49,18 @@ public class CommentController {
 		return new ResponseEntity(comment, HttpStatus.OK);
 	}
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@PostMapping(value = "/comment")
 	public ResponseEntity createComment(@RequestBody Comment comment) {
+		
+		comment.setCommentdate(new Date());
 
 		commentDAO.create(comment);
 
 		return new ResponseEntity(comment, HttpStatus.OK);
 	}
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@DeleteMapping("/comment/{commentid}")
 	public ResponseEntity deleteUser(@PathVariable int commentid) {
 		Comment comment=commentDAO.getComment(commentid);
@@ -69,7 +71,7 @@ public class CommentController {
 		return new ResponseEntity(commentid, HttpStatus.OK);
    }
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@PutMapping("/comment/{commentid}")
 	public ResponseEntity saveorupdateUser(@PathVariable int commentid, @RequestBody Comment comment) {
 

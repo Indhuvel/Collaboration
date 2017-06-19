@@ -1,5 +1,6 @@
 package com.niit.collaboration.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.niit.collaboration.dao.MychatDAO;
 import com.niit.collaboration.model.Mychat;
-import com.niit.collaboration.model.User;
 
 @RestController
 public class ChatController {
@@ -37,7 +37,7 @@ public class ChatController {
 		return new ResponseEntity<List<Mychat>>(listmychat, HttpStatus.OK);
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@GetMapping("/mychats/{chatid}")
 	public ResponseEntity getByMychatId(@PathVariable("chatid") int chatid) {
 
@@ -48,16 +48,17 @@ public class ChatController {
       return new ResponseEntity(mychat, HttpStatus.OK);
 	}
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@PostMapping(value ="/mychat")
 	public ResponseEntity insertChat(@RequestBody Mychat mychat) {
+		mychat.setCommentdate(new Date());
 
 		mychatDAO.insert(mychat);
 
 		return new ResponseEntity(mychat, HttpStatus.OK);
       }
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@DeleteMapping("/mychat/{chatid}")
 	public ResponseEntity deleteChat(@PathVariable int chatid) {
 		Mychat mychat=mychatDAO.getByMychatid(chatid);
@@ -68,7 +69,7 @@ public class ChatController {
 		return new ResponseEntity(chatid, HttpStatus.OK);
    }
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@PutMapping("/mychat/{chatid}")
 	public ResponseEntity saveorupdateUser(@PathVariable int chatid, @RequestBody Mychat mychat) {
 

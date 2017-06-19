@@ -8,7 +8,7 @@ public interface JobDAO {
 	
 	public List<Job>list();
 
-	public void saveOrUpdate(Job job);
+	public Job saveOrUpdate(Job job);
 	
 	public void delete (int jobId);
 	

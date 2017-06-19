@@ -36,7 +36,7 @@ public class UserController {
 		return new ResponseEntity<List<User>>(listuser, HttpStatus.OK);
 	}
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@GetMapping("/users/{userid}")
 	public ResponseEntity getByUserId(@PathVariable("userid") int userid) {
 
@@ -48,7 +48,7 @@ public class UserController {
 		return new ResponseEntity(user, HttpStatus.OK);
 	}
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@PostMapping(value = "/user")
 	public ResponseEntity createUser(@RequestBody User user) {
 
@@ -57,7 +57,7 @@ public class UserController {
 		return new ResponseEntity(user, HttpStatus.OK);
 	}
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@DeleteMapping("/user/{userid}")
 	public ResponseEntity deleteUser(@PathVariable int userid) {
 		User user=userDAO.getByUserId(userid);
@@ -68,7 +68,7 @@ public class UserController {
 		return new ResponseEntity(userid, HttpStatus.OK);
    }
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@PutMapping("/user/{userid}")
 	public ResponseEntity saveorupdateUser(@PathVariable int userid, @RequestBody User user) {
 

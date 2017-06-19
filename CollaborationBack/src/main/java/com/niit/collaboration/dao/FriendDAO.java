@@ -8,11 +8,13 @@ public interface FriendDAO {
 	
 	public List<Friend>list();
 
-	public void saveOrUpdate(Friend friend);
+	public Friend saveOrUpdate(Friend friend);
 	
 	public void delete (int friendId);
 	
 	public Friend getByFriendid(int friendId);
 	
-	public Friend getByStatus(String Status);
+	public List<Friend> getByFriendRequestList(int userid);
+
+	public List<Friend> FriendList(int userid);
 }

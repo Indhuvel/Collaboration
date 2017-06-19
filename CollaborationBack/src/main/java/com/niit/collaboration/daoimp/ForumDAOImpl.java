@@ -28,16 +28,16 @@ public class ForumDAOImpl implements ForumDAO {
 		return listForum;
 	}
 	@Transactional
-	public Forum getByForumid(int forumId) {
+	public Forum getByForumid(int forumid) {
 
-		Forum ForumId = (Forum) sessionFactory.getCurrentSession().get(Forum.class, forumId);
+		Forum ForumId = (Forum) sessionFactory.getCurrentSession().get(Forum.class, forumid);
 
 		return ForumId;
 	}
 
 	@Transactional
-	public Forum getByUsername(String userName) {
-		Forum Name = (Forum) sessionFactory.getCurrentSession().get(Forum.class, userName);
+	public Forum getByUsername(String username) {
+		Forum Name = (Forum) sessionFactory.getCurrentSession().get(Forum.class, username);
 
 		return Name;
 	}
@@ -51,8 +51,8 @@ public class ForumDAOImpl implements ForumDAO {
 	}
 
 	@Transactional
-	public void saveOrUpdate(Forum forum) {
-		sessionFactory.getCurrentSession().save(forum);
-
+	public Forum saveOrUpdate(Forum forum) {
+		sessionFactory.getCurrentSession().saveOrUpdate(forum);
+        return forum;
 	}
 }

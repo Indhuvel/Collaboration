@@ -7,8 +7,11 @@ public interface ForumDAO {
 	
 	public List<Forum>list();
 
-	public void saveOrUpdate(Forum forum);
-	public void delete (int forumId);
-	public Forum getByForumid(int forumId);
-	public Forum getByUsername(String userName);
+	public Forum saveOrUpdate(Forum forum);
+	
+	public void delete (int forumid);
+	
+	public Forum getByForumid(int forumid);
+	
+	public Forum getByUsername(String username);
 }

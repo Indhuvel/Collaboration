@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.niit.collaboration.dao.BlogDAO;
 import com.niit.collaboration.model.Blog;
-import com.niit.collaboration.model.User;
 
 @RestController
 public class BlogController {
@@ -46,6 +45,7 @@ public class BlogController {
 		return new ResponseEntity<String>("Deleted Blog Successfully", HttpStatus.OK);
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@RequestMapping(value="/updateBlog/{blogid}",method=RequestMethod.PUT)
 	public ResponseEntity<Blog> updateBlog(@PathVariable("blogid") int blogid,@RequestBody Blog blog)
 	{
@@ -57,6 +57,7 @@ public class BlogController {
 		return new ResponseEntity(blog, HttpStatus.OK);
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@RequestMapping(value ="/getAllBlog/{blogid}", method = RequestMethod.GET)
 	public ResponseEntity<List<Blog>> getAllBlog(@PathVariable("blogid") int blogid) {
 		
@@ -67,6 +68,4 @@ public class BlogController {
 
 		return new ResponseEntity(blog, HttpStatus.OK);
      }
-  	
-
 }
