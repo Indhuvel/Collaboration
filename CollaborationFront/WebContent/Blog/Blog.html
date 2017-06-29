@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<style>
+<link ref="text/css">
+@import "compass/css3";
+body {
+  font-family: helvetica,arial,sans-serif;
+  background-color: #80CBC4;
+  color:blue;
+  font-size: 16px;
+  line-height: 1.4em;
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.2); }
+a {
+  color: #2dbc24;
+  text-decoration: none; }
+  a:active,
+  a :-moz-any-link:focus {
+    outline: none; }
+#content {
+  width: 600px;
+  margin: 20px 0 0 50px;
+  padding-bottom: 3em;
+  position: relative;
+  z-index: 2; }
+h1, h2, h3 {
+  font-weight: normal; }
+h3 {
+  display: inline-block;
+  background-color: #2dbc24;
+  padding: 0.2em 0.6em;
+  margin-bottom: 0.4em;
+  text-shadow: none; }
+h5 {
+  text-transform: uppercase;
+  font-weight: normal;
+  margin-bottom: 0.3em;
+  line-height: 1.2em; }
+h6 {
+  text-transform: uppercase;
+  font-size: 0.9em;
+  font-weight: normal;
+  margin-bottom: 0.8em; }
+p {
+  margin-bottom: 1em; }
+section {
+  margin-top: 2em;
+  *display: inline-block; }
+  section:after {
+    content: " ";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden; }
+  section h2 {
+    color: #f9f9f8;
+    font-size: 28px;
+    line-height: 42px;
+    margin-bottom: 0.5em;
+    position: relative;
+    left: -50px;
+    padding-left: 50px; }
+section#contact {
+  position: relative; }
+#contact-wrapper {
+  float: left;
+  width: 590px;
+  height: 338px;
+  position: relative;
+  z-index: 100; }
+  #contact-wrapper .inner {
+    width: 590px;
+    height: 338px;
+    -webkit-perspective: 1000;
+    float: left;
+    position: absolute; }
+    #contact-wrapper .inner .front {
+      z-index: 20; }
+    #contact-wrapper .inner .back {
+      width: 590px;
+      height: 338px;
+      -webkit-transform: rotateX(180deg);
+      z-index: 10;
+      font-family: Georgia, helvetica,sans-serif; }
+  #contact-wrapper .card {
+    width: 590px;
+    height: 338px;
+    -webkit-transform-style: preserve-3d;
+    -webkit-transition: 0.5s; }
+  #contact-wrapper .face {
+    position: absolute;
+    -webkit-backface-visibility: hidden; }
+#contact-wrapper.flip .card {
+  -webkit-transform: rotateX(180deg); }
+.no-csstransforms3d #contact-wrapper .inner .back {
+  opacity: 0; }
+#form-wrapper {
+  width: 566px;
+  background-color: #fff;
+  padding: 12px;
+  opacity: 0.9;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px; }
+#envelope {
+  background: #dbc09a url(http://concepts.blackantmedia.com/flippingform/images/texture-envelope.jpg) 0 0 repeat;
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: rotateX(180deg);
+  width: 590px;
+  height: 198px !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  font-size: 40px;
+  line-height: 1em;
+  text-shadow: none;
+  color: #333;
+  text-align: center;
+  padding-top: 140px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px; }
+  #envelope img {
+    position: absolute;
+    top: 10px;
+    right: 10px; }
+span{
+    float: right;
+}
+form {
+  margin-top:42px;
+  padding:50px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #2e2727;
+  border: solid 1px #211c1c;
+  -webkit-box-shadow: inset 0 0px 30px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: inset 0 0px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 0px 30px rgba(0, 0, 0, 0.3);
+  *display: inline-block; }
+  form:after {
+    content: " ";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden; }
+  form label {
+    font-size: 0.9em;
+    width: 120px;
+    text-align: right;
+    float: left;
+    line-height: 1.8em;
+    color: #f1f1f1; }
+  form sup {
+    color: #2dbc24; }
+  form p {
+    margin-bottom: 0.8em;
+    *display: inline-block; }
+    form p:after {
+      content: " ";
+      display: block;
+      height: 0;
+      clear: both;
+      visibility: hidden; }
+  form input {
+    float: right;
+    width: 390px;
+    font-size: 14px;
+    padding: 0.4em 0.3em;
+    background-color: #282222;
+    color: #fff;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    font-family: helvetica,arial;
+    border: solid 1px #211c1c;
+    -webkit-box-shadow: 0 1px 0 #454545;
+    -moz-box-shadow: 0 1px 0 #454545;
+    box-shadow: 0 1px 0 #454545; }
+  form textarea {
+    width: 390px;
+    height: 108px;
+    float: right;
+    font-size: 14px;
+    padding: 0.4em 0.3em;
+    color: #fff;
+    background-color: #282222;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    font-family: helvetica,arial;
+    border: solid 1px #211c1c;
+    -webkit-box-shadow: 0 1px 0 #454545;
+    -moz-box-shadow: 0 1px 0 #454545;
+    box-shadow: 0 1px 0 #454545; }
+  form input:focus, form textarea:focus {
+    outline: none;
+    border-color: #2dbc24;
+    -webkit-box-shadow: #6ce164 0 0 5px;
+    -moz-box-shadow: #6ce164 0 0 5px;
+    box-shadow: #6ce164 0 0 5px; }
+  form button {
+    margin-left: 135px;
+    background:#009688;
+    background: -moz-linear-gradient(top, #2dbc24 0%, #23911c 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #1565C0), color-stop(100%, #1565C0));
+    -moz-box-shadow: inset 0 1px 0 0 #AED581, 0 1px 1px 0 #AED581;
+    -webkit-box-shadow: inset 0 1px 0 0 #AED581, 0 1px 1px 0 #AED581;
+    -webkit-background-clip: padding-box;
+    border-top: 1px solid #23911c;
+    border-right: 1px solid #1c7316;
+    border-bottom: 1px solid #145510;
+    border-left: 1px solid #1c7316;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 13px;
+    line-height: 1;
+    height: 28px;
+    padding: 0 1em 0.25em 1em;
+    text-shadow: 0 -1px rgba(0, 0, 0, 0.2); }
+    form button:hover {
+      background: #2dbc24;
+      background: -moz-linear-gradient(top, #2aaf22 0%, #208419 100%);
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #2aaf22), color-stop(100%, #208419));
+      -moz-box-shadow: inset 0 1px 0 0 #32d128, 0 1px 1px 0 #092607;
+      -webkit-box-shadow: inset 0 1px 0 0 #32d128, 0 1px 1px 0 #092607;
+      border-top: 1px solid #208419;
+      border-right: 1px solid #196614;
+      border-bottom: 1px solid #11480e;
+      border-left: 1px solid #196614;
+      cursor: pointer; }
+.validation-advice {
+  float: right;
+  width: 400px;
+  font-size: 12px;
+  color: #ff0; }
+#mail-slot {
+  width: 624px;
+  height: 11px;
+  position: absolute;
+  bottom: 0;
+  left: -17px;
+  background: transparent url(http://concepts.blackantmedia.com/flippingform/images/mail-slot.png) 0 0 no-repeat;
+  display: none; }
+#thanks, #error {
+  font-family: Georgia, helvetica,sans-serif;
+  color: #fff;
+  text-align: center;
+  padding-top: 70px;
+  -webkit-transform: rotate(-3deg);
+  -moz-transform: rotate(-3deg);
+  transform: rotate(-3deg);
+  display: none; }
+  #thanks h5, #error h5 {
+    font-size: 50px;
+    margin-bottom: 0.5em;
+    text-transform: none; }
+  #thanks p, #error p {
+    font-size: 35px;
+    margin-bottom: 1em; }
+  #thanks a#send-another, #error a#send-another {
+    font-size: 22px; }
+</style>
+<script>
+window.addEvent('domready', function() {  
+  var form = new FlippingContactForm($('contact-wrapper'), {});
+});
+var FlippingContactForm = new Class({
+  Implements: [Options, Events],
+  
+  options: {
+    dropDelay: 2500,
+    thanksDelay: 3500
+  },
+  senderName: '',
+  senderEmail: '',
+  
+  initialize: function(container, options) { 
+    this.setOptions(options);
+    this.container = $(container);
+    this.form = this.container.getElement('form');
+    if (!Modernizr.csstransforms3d) {
+      $('envelope').morph({opacity: 0});
+    }
+    new Form.Validator.Inline(this.form);
+    new Form.Request(this.form, null, {
+        requestOptions: {
+          useSpinner: false
+        },
+        onSend: function() {
+          this.flipForm()
+        }.bind(this),
+        onComplete: function(target, response) {
+          this.showThanks()
+        }.bind(this),
+    });
+    $$('#send-another').addEvent('click', function(e) {
+      e.stop();
+      this.resetForm();
+    }.bind(this));
+  },
+  flipForm: function() {
+    $('from').set('html', $('name').get('value'));
+    this.senderName = $('name').get('value');
+    this.senderEmail = $('email').get('value');
+    $$('#mail-slot').show();
+    this.container.addClass('flip'); 
+    (function() { this.dropForm(); }).delay(this.options.dropDelay, this);
+    if (!Modernizr.csstransforms3d) {
+      $('form-wrapper').morph({opacity: 0});
+      $('envelope').morph({opacity: 1});
+    }
+  },
+  dropForm: function() {
+    this.container.setStyle('overflow', 'hidden');
+    this.container.getChildren('.inner').move({
+      relativeTo: this.container,
+      offset: {x: 0, y: 500},
+      transition: Fx.Transitions.Quint.easeIn      
+    });
+  },
+  showThanks: function() {
+    (function() { $('thanks').reveal({duration: 1000}); }).delay(this.options.thanksDelay, this);
+  },
+  showErrorMessage: function() {
+    (function() { $('error').reveal({duration: 1000}); }).delay(this.options.thanksDelay, this);
+  },
+  resetForm: function() {
+    $$('#thanks').hide();
+    $$('#mail-slot').hide();    
+    this.container.setStyle('overflow', 'visible');
+    this.container.removeClass('flip');     
+    this.container.getChildren('.inner').move({
+      relativeTo: this.container,
+      offset: {x: 0, y: -500},
+      transition: Fx.Transitions.Quint.easeOut        
+    });
+    if (!Modernizr.csstransforms3d) {
+      $('form-wrapper').morph({opacity: 1});
+      $('envelope').morph({opacity: 0});
+    }
+    $('name').set('value', this.senderName);
+    $('email').set('value', this.senderEmail);
+    $('message').set('value', '');
+    (function() { $('message').focus(); }).delay(500, this);
+  }
+});
+</script>
+</head>
+
+<body ng-app>
+
+<div id="content">              
+  <section id="contact"> 
+    <div id="contact-wrapper"> 
+        <div class="inner"> 
+          <div class="card"> 
+            <div id="form-wrapper" class="face front"> 
+          Blog
+              <form action="http://concepts.blackantmedia.com/flippingform/mock_send.php" method="post" id="contact-form"> 
+                <p> 
+                  <label for="name">Your Name <sup>*</sup></label> 
+                  <input type="text" id="name" name="name" class="required" /> 
+                </p> 
+                <p> 
+                  <label for="email">Email Address <sup>*</sup></label> 
+                  <input type="email" id="email" name="email" class="required validate-email" /> 
+                </p> 
+                <p> <label for="textarea">message <sup>*</sup></label>
+                   <textarea ng-model="test" ng-trim="false" maxlength="1500"></textarea>
+                   </p>
+                   <span>{{150 - test.length}} left</span>
+                <button type="submit">Send Message</button> 
+              </form> 
+            </div> 
+
+            
+      <div id="mail-slot"></div>                 
+  </section>             
+ </div> 
+</body>
+</html>
