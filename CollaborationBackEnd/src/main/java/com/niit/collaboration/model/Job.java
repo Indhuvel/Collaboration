@@ -2,6 +2,7 @@ package com.niit.collaboration.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -21,6 +22,7 @@ public class Job {
 	private String jobdesc;
 	private String qualification;
 	private String status;
+	@Column(name="postdate")
     private Date postdate;
     
 	public int getJobid() {
@@ -51,12 +53,21 @@ public class Job {
 		return status;
 	}
 	public void setStatus(String status) {
+		if(status==null)
+		{
+			status=new String("V");
+		}
+		
+		
 		this.status = status;
 	}
 	public Date getPostdate() {
 		return postdate;
 	}
 	public void setPostdate(Date postdate) {
+		if(postdate==null){
+			postdate=new Date(System.currentTimeMillis());
+		}
 		this.postdate = postdate;
 	}
 
