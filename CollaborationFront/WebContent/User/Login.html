@@ -64,7 +64,7 @@ h2{
  <hr/>
    
      
-<form name="myForm" onsubmit="()">
+<form name="myForm" onsubmit="()" method="post" ng-submit="vm.login()">
    
    
 <div id="divuser" class="form-group has-feedback">
@@ -75,7 +75,7 @@ h2{
                     
 <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
                     
-<input type="text" class="form-control" id="username" ng-model="username">
+<input type="text" placeholder="Enter Your Username" class="form-control" name="username"  id="username" ng-model="vm.username" />
                 </div>
                 
 <span id="useroksts" class="glyphicon glyphicon-ok  form-control-feedback" aria-hidden="true"></span>
@@ -94,18 +94,19 @@ h2{
                    
  <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
                     
-<input type="password" class="form-control" id="password" aria-describedby="inputGroupSuccess1Status" ng-model="password">
+<input type="password" class="form-control" name="password"  placeholder="Enter Your Password" id="password" aria-describedby="inputGroupSuccess1Status" ng-model="vm.password"/>
   </div>
                
  <span id="passoksts" class="glyphicon glyphicon-ok  form-control-feedback" aria-hidden="true"></span>
                
  <span id="passerrsts" class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>  </div>
             
-            
+       <br>
+				{{message}}         
 
 <div class="form-group">
                 
-<button type="submit" class="btn btn-primary" value="Login">Sumit</button>
+<button type="submit" name="submit" ng-disabled="myForm.$invalid" class="btn btn-primary" value="Login">Sumit</button>
    </div>
    
   </form>
