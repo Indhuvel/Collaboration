@@ -4,12 +4,12 @@ app.service('JobService', ['$http', '$q','$rootScope', function($http, $q,$rootS
 	
 	console.log("JobService...")
 	
-	var BASE_URL='http://localhost:8081/CollaborationBackEnd'
+    var BASE_URL = 'http://localhost:8792/RestfulServices';
 		
     return {
          
-		applyForJob: function(jobID) {
-                    return $http.post(BASE_URL+"/applyForJob/"+jobID)
+		applyForJob: function(jobid) {
+                    return $http.post(BASE_URL+"/applyForJob/"+jobid)
                             .then(
                                     function(response){
                                         return response.data;
@@ -18,9 +18,9 @@ app.service('JobService', ['$http', '$q','$rootScope', function($http, $q,$rootS
                             );
             },
             
-            getJobDetails: function(jobID) {
-            	console.log("Getting job details of " + jobID)
-                return $http.get(BASE_URL+"/getJobDetails/" + jobID)
+            getJobDetails: function(jobid) {
+            	console.log("Getting job details of " + jobid)
+                return $http.get(BASE_URL+"/getJobDetails/" + jobid)
                         .then(
                                 function(response){
                                 	$rootScope.selectedJob = response.data
@@ -47,7 +47,7 @@ app.service('JobService', ['$http', '$q','$rootScope', function($http, $q,$rootS
                             );
             },
             postAJob: function(job){
-                return $http.post(BASE_URL+'/postAJob/', job)
+                return $http.post(BASE_URL+'/job/', job)
                         .then(
                                 function(response){
                                     return response.data;
@@ -55,12 +55,11 @@ app.service('JobService', ['$http', '$q','$rootScope', function($http, $q,$rootS
                                 function(errResponse){
                                     console.error('Error while posting job');
                                     return $q.reject(errResponse);
-                                }
-                        );
+                                });
         },
              
-            rejectJobApplication: function(userID, jobID){
-                    return $http.put(BASE_URL+'/rejectJobApplication/'+userID+ "/" + jobID)
+            rejectJobApplication: function(userid, jobid){
+                    return $http.put(BASE_URL+'/rejectJobApplication/'+userid+ "/" + jobid)
                             .then(
                                     function(response){
                                         return response.data;
@@ -72,8 +71,8 @@ app.service('JobService', ['$http', '$q','$rootScope', function($http, $q,$rootS
                             );
             },
              
-            callForInterview: function(userID, jobID){
-            	  return $http.put(BASE_URL+'/callForInterview/'+userID, jobID)
+            callForInterview: function(userid, jobid){
+            	  return $http.put(BASE_URL+'/callForInterview/'+userid, jobid)
                             .then(
                                     function(response){
                                         return response.data;
@@ -84,8 +83,8 @@ app.service('JobService', ['$http', '$q','$rootScope', function($http, $q,$rootS
                                     }
                             );
             },
-            selectUser: function(userID,jobID){
-            	  return $http.put(BASE_URL+'/selectUser/'+userID +"/"+ jobID)
+            selectUser: function(userid,jobid){
+            	  return $http.put(BASE_URL+'/selectUser/'+userid +"/"+ jobid)
                             .then(
                                 function(response){
                                     return response.data;
@@ -98,7 +97,7 @@ app.service('JobService', ['$http', '$q','$rootScope', function($http, $q,$rootS
         }
         ,
         getAllJobs: function(){
-            return $http.get(BASE_URL+'/getAllJobs/')
+            return $http.get(BASE_URL+'/job/')
                     .then(
                             function(response){
                                 return response.data;

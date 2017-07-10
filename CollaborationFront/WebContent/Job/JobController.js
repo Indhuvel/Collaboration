@@ -6,20 +6,16 @@ app	.controller('JobController',['JobService','$location', '$rootScope',
 							var self = this;
 
 							this.job = {
-								id : '',
-								title : '',
-								description : '',
-								dateTime : '',
-								qualification : '',
-								status : '',
-								errorCode : '',
-								errorMessage : ''
+									jobid : '',jobprofile : '',jobdesc : '',postdate : '',qualification : '',status : ''
+
+								/*errorCode : '',
+								errorMessage : ''*/
 							};
 							this.jobs = [];
 							
 							this.applyForJob = applyForJob
 
-							function applyForJob(jobID) {
+							function applyForJob(jobid) {
 								console.log("applyForJob");
 								var currentUser = $rootScope.currentUser
 								console.log("currentUser.id:" + currentUser.id)
@@ -35,11 +31,11 @@ app	.controller('JobController',['JobService','$location', '$rootScope',
 									
 									}
 								console.log("->userID :" + currentUser.id
-										+ "  applying for job:" + jobID)
+										+ "  applying for job:" + jobid)
 										
 										
 								JobService
-										.applyForJob(jobID)
+										.applyForJob(jobid)
 										.then(
 												function(data) {
 													self.job = data;
@@ -67,14 +63,14 @@ app	.controller('JobController',['JobService','$location', '$rootScope',
 								});
 							};
 
-							self.rejectJobApplication = function(userID) {
-						    var jobID =$rootScope.selectedJob.id;
-								JobService.rejectJobApplication(userID,jobID												)
+							self.rejectJobApplication = function(userid) {
+						    var jobid =$rootScope.selectedJob.id;
+								JobService.rejectJobApplication(userid,jobid												)
 										.then(
 												function(d) {
 													self.job = d;
 													alert("You have successfully rejected the job application of the " +
-															"user : " +userID)
+															"user : " +userid)
 												},
 												function(errResponse) {
 													console
@@ -82,11 +78,11 @@ app	.controller('JobController',['JobService','$location', '$rootScope',
 												});
 							};
 
-							self.callForInterview = function(userID) {
-								var jobID =$rootScope.selectedJob.id;	
+							self.callForInterview = function(userid) {
+								var jobid =$rootScope.selectedJob.id;	
 								JobService
-										.callForInterview(userID,
-												jobID)
+										.callForInterview(userid,
+												jobid)
 										.then(
 												function(d) {
 													self.job = d;
@@ -97,10 +93,10 @@ app	.controller('JobController',['JobService','$location', '$rootScope',
 															.error('Error while changing the status "call for interview" ');
 												});
 							};
-							self.selectUser = function(userID) {
-								var jobID =$rootScope.selectedJob.id;		
+							self.selectUser = function(userid) {
+								var jobid =$rootScope.selectedJob.id;		
 								JobService
-										.selectUser(userID, jobID)
+										.selectUser(userid, jobid)
 										.then(
 												function(d) {
 													self.job = d;
@@ -148,37 +144,30 @@ app	.controller('JobController',['JobService','$location', '$rootScope',
 
 							self.getJobDetails = getJobDetails
 
-							function getJobDetails(jobID) {
-								console.log('get Job details of the id', jobID);
+							function getJobDetails(jobid) {
+								console.log('get Job details of the id', jobid);
 								JobService
-										.getJobDetails(jobID)
+										.getJobDetails(jobid)
 										.then(
 												function(d) {
 													self.job = d;
 													
-													$location
-															.path('/view_job_details');
+													$location.path('/view_job_details');
 												},
 												function(errResponse) {
 													console
 															.error('Error while fetching blog details');
 												});
-							}
-							;
+							};
 
 							self.reset = function() {
 								console.log('resetting the Job');
 								self.job = {
-									id : '',
-									title : '',
-									description : '',
-									dateTime : '',
-									qualification : '',
-									status : '',
-									errorCode : '',
-									errorMessage : ''
+										jobid : '',jobprofile : '',jobdesc : '',postdate : '',qualification : '',status : ''
+									/*errorCode : '',
+									errorMessage : ''*/
 								};
-								$scope.myForm.$setPristine(); // reset Form
+								//$scope.myForm.$setPristine(); // reset Form
 							};
 
 						} ]);

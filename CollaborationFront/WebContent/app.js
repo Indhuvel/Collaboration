@@ -9,7 +9,7 @@ app.config(function($routeProvider) {
 	.when('/login', {
 		templateUrl : 'User/Login.html',
 		controller : 'UserController',
-            controllerAs: 'vm'
+            controllerAs: 'uc'
 
 	})
    .when('/register', {
@@ -19,9 +19,31 @@ app.config(function($routeProvider) {
 
 	})
 	.when('/blog', {
-		templateUrl : 'Blog/Blog.html'
+		templateUrl : 'Blog/Blog.html',
+		controller : 'BlogController',
+		controllerAs : 'bc'
 
 	})
+	.when('/viewblog', {
+		templateUrl : 'Blog/ViewBlog.html',
+		controller : 'BlogController',
+		controllerAs : 'bc'
+
+	})
+	.when('/job', {
+		templateUrl : 'Job/Job.html',
+		controller : 'JobController',
+			controllerAs : 'jc'
+	})
+
+	
+    .when('/friend', {
+		templateUrl : 'Friend/friends.html',
+		controller : 'FriendController',
+		controllerAs : 'fc'
+
+	})
+	
 	.otherwise({
 		resirectTo : '/'
 	});

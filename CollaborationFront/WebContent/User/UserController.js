@@ -1,95 +1,170 @@
 'use strict';
 
-app.controller('UserController',['$scope', '$location', 'UserService', function($scope, $location, UserService) {
-
+app.controller('UserController',['$scope','UserService','$location','$rootScope','$cookieStore','$http',
+	function($scope, UserService, $location, $rootScope,$cookieStore, $http) {
 	console.log("UserController...")
+      var i = 0;
+	  var j = 0;
       var self=this;
 	
 	this.user ={userid:'',username:'',email:'',contact:'',password:'',address:'',role:'',status:'',isonline:''};
-
+	self.userLoggedIn="";
+	self.currentUser ={userid:'',username:'',email:'',contact:'',password:'',address:'',role:'',status:'',isonline:''};
+	
 	self.users=[];
 	
-	 self.submit = submit;
-	 self.edit = edit;
-     self.remove = remove;
-	 self.reset = reset; 
+	$scope.orderByMe = function(x) {
+		$scope.myOrderBy = x;
+	}
+	
+	self.fetchAllUsers = function() {
+		console.log("fetchAllUsers...")
+		UserService.fetchAllUsers()
+				.then(function(d) {
+							self.users = d;
+							//$rootScope.users=d;
+						},
+						function(errResponse) {
+							console.error('Error while fetching Users');
+						});
+	};
 
-	 /*fetchAllUsers();
-	    reset();*/
+	 self.fetchAllUsers();
 
-	    function fetchAllUsers(){
-	        UserService.fetchAllUsers()
-	            .then(
-	            function(d) { 	
-	                self.users = d;
-	            },
-	            function(errResponse){
-	                console.error('Error while fetching Users');
-	            }
-	        );
-	    }
-	   function createUser(user) {
-			console.log("createUser...")  
+		self.createUser = function(user) {
+			console.log("createUser...")
 			UserService.createUser(user).then(function(d) {
-								self.cuser = d;
-								console.log(self.cuser)  
-								alert("Thank you for registration");
-								$location.path("/login")
-							}, 
+								alert("Thank you for registration")
+								$location.path('/login')
+							},
 							function(errResponse) {
 								console.error('Error while creating User.');
 							});
 		};
+		self.myProfile = function() {
+			console.log("myProfile...")
+			UserService
+					.myProfile()
+					.then(
+							function(d) {
+								self.user = d;
+								$location
+										.path("/myProfile")
+							},
+							function(errResponse) {
+								console
+										.error('Error while fetch profile.');
+							});
+		};
 
-		 function updateUser(user, id){
-	        UserService.updateUser(user, id)
-	            .then(
-	            fetchAllUsers,
-	            function(errResponse){
-	                console.error('Error while updating User');
-	            }
-	        );
-	    }
-	    
-	    function deleteUser(id){
-	        UserService.deleteUser(id)
-	            .then(
-	            fetchAllUsers,
-	            function(errResponse){
-	                console.error('Error while deleting User');
-	            }
-	        );
-	    }
-	 
-	    function submit() {
-	       
-	            console.log('Saving New User', self.user);
-	            createUser(self.user);
-	      
-	    }
-	 
-	    function edit(id){
-	        console.log('id to be edited', id);
-	        for(var i = 0; i < self.users.length; i++){
-	            if(self.users[i].userid === id) {
-	                self.user = angular.copy(self.users[i]);
-	                break;
-	            }
-	        }
-	    }
-	 
-	    function remove(id){
-	        console.log('id to be deleted', id);
-	        if(self.user.userid === id) {//clean form if the user to be deleted is shown there.
-	            reset();
-	        }
-	        deleteUser(id);
-	    }
-	 
-	 
-	    function reset(){
-	    	self.user={userid:null,username:'',email:'',contact:'',password:'',address:'',role:'',status:'',isonline:''};
-	       
-	        //$scope.myForm.$setPristine(); //reset Form
-	    }
-}]);
+		self.accept = function(id) {
+			console.log("accept...")
+			UserService
+					.accept(id)
+					.then(
+							function(d) {
+								self.user = d;
+								self.fetchAllUsers
+								$location
+										.path("/manage_users")
+								alert(self.user.errorMessage)
+
+							},
+
+							function(errResponse) {
+								console
+										.error('Error while updating User.');
+							});
+		};
+
+		self.reject = function(id) {
+			console.log("reject...")
+			var reason = prompt("Please enter the reason");
+			UserService.reject(id, reason).then(
+					function(d) {
+						self.user = d;
+						self.fetchAllUsers
+						$location.path("/manage_users")
+						alert(self.user.errorMessage)
+
+					}, null);
+		};
+
+		self.updateUser = function(currentUser) {
+			console.log("updateUser...")
+			UserService.updateUser(currentUser).then(
+					self.fetchAllUsers, null);
+		};
+
+		self.update = function() {
+			{
+				console.log('Update the user details',
+						$rootScope.currentUser);
+				self.updateUser($rootScope.currentUser);
+			}
+			self.reset();
+		};
+
+		self.authenticate = function(user) {
+			console.log("authenticate...")
+			UserService.authenticate(user).then(function(d) {
+								self.user = d;
+								console.log("user.errorCode: "+ self.user.errorCode)
+								if (self.user.errorCode == "404"){
+									alert(self.user.errorMessage)
+									self.user.id = "";
+									self.user.password = "";
+								} else { // valid
+											// credentials
+									console.log("Valid credentials. Navigating to home page")
+                                   self.userLoggedIn="true"
+									if(self.user.role=="admin"){
+										console.log("You are admin")
+										self.fetchAllUsers();
+										}
+									console.log('Current user : '+ self.user)
+									$rootScope.currentUser = self.user
+									$cookieStore.put('currentUser',	self.user);
+									$http.defaults.headers.common['Authorization'] = 'Basic '+ $rootScope.currentUser;
+									$location.path('/');
+								}
+							},
+							function(errResponse) {
+								console.error('Error while authenticate Users');
+							});
+		};
+
+		self.logout = function() {
+			console.log("logout")
+			self.userLoggedIn="false"
+			$rootScope.currentUser = {};
+			$cookieStore.remove('currentUser');
+			UserService.logout()
+			$location.path('/login');
+
+		}
+
+		
+		self.login = function() {
+			{
+				console.log('login validation????????',self.user);
+				self.authenticate(self.user);
+			}
+
+		};
+
+		self.submit = function() {
+			{
+				console.log('Saving New User', self.user);
+				self.createUser(self.user);
+			}
+			//self.reset();
+		};
+
+		self.reset = function() {
+			self.user = {userid:'',username:'',email:'',contact:'',password:'',address:'',role:'',status:'',isonline:''};
+				
+			//$scope.myForm.$setPristine(); // reset Form
+		};
+
+	} ]);

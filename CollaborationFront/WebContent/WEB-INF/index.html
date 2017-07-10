@@ -6,26 +6,32 @@
 <title>Insert title here</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-cookies.js"></script>
-<script type="text/javascript" src="app.js"></script>
 
+<script type="text/javascript" src="app.js"></script>
 <script type="text/javascript" src="User/UserController.js"></script>
-  <script type="text/javascript" src="User/UserService.js"></script>
+<script type="text/javascript" src="User/UserService.js"></script>
+<script type="text/javascript" src="Blog/BlogController.js"></script>
+<script type="text/javascript" src="Blog/BlogService.js"></script>
+<script type="text/javascript" src="Job/JobController.js"></script>
+<script type="text/javascript" src="Job/JobService.js"></script>
 
 
 </head>
-<body ng-app="myApp">
+<body ng-app="myApp" ng-controller="UserController as uc">
 
+<p ng-hide="currentUser.name"> <br><br><br></p>
+
+<h2  ng-show="currentUser.name">Welcome {{currentUser.name}} You Are Here An {{currentUser.role}}</h2>
+	
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 
 		<div class="container">
@@ -46,36 +52,40 @@
 					<li class="dropdown"><a data-toggle="dropdown" href="#">Blog<span
 							class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="#!blog">View</a></li>
-							<li><a href="#">Add</a></li>
+							<li><a href="#!viewblog">View</a></li>
+							<li><a href="#!blog">Add</a></li>
 						</ul></li>
 
 					<li class="dropdown"><a data-toggle="dropdown" href="#">Friends<span
 							class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="#">Search</a></li>
-							<li><a href="#">View</a></li>
+							<li><a href="#">Search Friend</a></li>
+							<li><a href="#">View Friends</a></li>
 						</ul></li>
 					<li class="dropdown"><a data-toggle="dropdown" href="#">Jobs<span
 							class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="#">Search</a></li>
-							<li><a href="#">Add</a></li>
-							<li><a href="#">Post</a></li>
+							<li><a href="#!search_job">Search Job</a></li>
+							<li><a href="#!job">Post Job</a></li>
+							<li><a href="#!view_applied_jobs">View Job</a></li>
 						</ul></li>
 					<li><a href="#">Events</a></li>
-					<li><a href="#">Forum</a></li>
+					<li  class="dropdown"><a data-toggle="dropdown" href="#">Chat Forums<span
+							class="caret"></span></a>
+							<ul class="dropdown-menu">	
+							<li><a href="#">Group</a></li>
+							</ul></li>
 				</ul>
 
          <ul class="nav navbar-nav navbar-right">
 
-					<li><a href="#!login"><span
+					<li><a href="#!login" ng-hide="currentUser.name"><span
 							class="glyphicon glyphicon-log-in"></span>Sign In</a></li>
-					<li><a href="#!register" data-toggle="modal"
-						data-target='#modalRegister'><span
+					<li><a href="#!register" ng-hide="currentUser.name"><span
 							class="glyphicon glyphicon-user"></span>Register</a></li>
 
-					<li><a href="#"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+					<li><a href="#" ng-click="uc.logout()" ng-show="currentUser.name">
+					<span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
 
 				</ul>
 
@@ -86,10 +96,12 @@
 		</div>
 
 	</nav>
+	 <br>
 	<br>
 	<br>
-	<h2>{{5+5}}</h2>
-	
+	<br>
+	 <!-- <h2>{{5+5}}</h2>
+	 -->
 	
 	
 	

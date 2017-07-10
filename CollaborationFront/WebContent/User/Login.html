@@ -57,25 +57,29 @@ h2{
 </style>
 
 </head>
-<body>								
+<body ng-controller="UserController As uc">								
   <div class="boxbg">
+        
+        <div ng-show='ctrl.user.errorMessage'>
+		<div class="alert alert-danger fade in">
+			{{message}}</div></div>
         
   <h2><strong>Login</strong></h2>
  <hr/>
    
      
-<form name="myForm" onsubmit="()" method="post" ng-submit="vm.login()">
+<form name="myForm"  method="post" ng-submit="uc.login()">
    
-   
+   <div class="row" ng-class="{ 'has-error': form.name.$dirty && form.name.$error.required }">
 <div id="divuser" class="form-group has-feedback">
                
- <label for="username">Username :</label>
+ <label for="username">Email ID :</label>
                
  <div class="input-group">
                     
-<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+<span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
                     
-<input type="text" placeholder="Enter Your Username" class="form-control" name="username"  id="username" ng-model="vm.username" />
+<input type="text" placeholder="Enter Your Email" class="form-control" name="email"  id="email" ng-model="uc.user.email" />
                 </div>
                 
 <span id="useroksts" class="glyphicon glyphicon-ok  form-control-feedback" aria-hidden="true"></span>
@@ -94,18 +98,14 @@ h2{
                    
  <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
                     
-<input type="password" class="form-control" name="password"  placeholder="Enter Your Password" id="password" aria-describedby="inputGroupSuccess1Status" ng-model="vm.password"/>
+<input type="password" class="form-control" name="password"  placeholder="Enter Your Password" id="password" 
+aria-describedby="inputGroupSuccess1Status" ng-model="uc.user.password"/>
   </div>
                
  <span id="passoksts" class="glyphicon glyphicon-ok  form-control-feedback" aria-hidden="true"></span>
                
  <span id="passerrsts" class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>  </div>
-            
-       <br>
-				{{message}}         
-
-<div class="form-group">
-                
+                            
 <button type="submit" name="submit" ng-disabled="myForm.$invalid" class="btn btn-primary" value="Login">Sumit</button>
    </div>
    
