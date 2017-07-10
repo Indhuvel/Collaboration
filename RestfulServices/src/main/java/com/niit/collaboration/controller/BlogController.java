@@ -6,7 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,7 +30,22 @@ public class BlogController {
 	  
 	return new ResponseEntity<List<Blog>>(listblog, HttpStatus.OK);
     }
-	
+   @GetMapping("/acceptedblog")
+	public ResponseEntity<List<Blog>> acceptedBlogsList() {
+		List<Blog> listblog = blogDAO.getAcceptedList();
+		return new ResponseEntity<List<Blog>>(listblog, HttpStatus.OK);
+	}
+	@GetMapping("/notAcceptedblog")
+	public ResponseEntity<List<Blog>> notAcceptedBlogList() {
+		List<Blog> listblog = blogDAO.getNotAcceptedList();
+		return new ResponseEntity<List<Blog>>(listblog, HttpStatus.OK);
+	}
+	@PutMapping("/acceptBlog")
+	public ResponseEntity acceptBlog(@RequestBody Blog blog){
+		blog.setStatus("A");
+		 blogDAO.saveOrUpdate(blog);
+		return new ResponseEntity(blog, HttpStatus.OK);
+	}
 	@RequestMapping(value ="/insertBlog", method = RequestMethod.POST)
 	public ResponseEntity<String> insertBlog(@RequestBody Blog blog) {
 		blog.setCreatedate(new Date());
