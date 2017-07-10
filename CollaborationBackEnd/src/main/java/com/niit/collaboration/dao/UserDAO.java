@@ -16,7 +16,7 @@ public interface UserDAO {
 
 	public User getByUserId(int userid);
 
-	public User getByMail(String mail);
+	public User getByMail(String email);
 
 	public User get(String empID);
 

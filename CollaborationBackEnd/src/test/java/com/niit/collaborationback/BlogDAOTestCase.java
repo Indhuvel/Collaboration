@@ -37,7 +37,7 @@ public class BlogDAOTestCase {
 		blog.setDescription("www.indiabixapp.com");
 	    blog.setStatus("active");
 	    blog.setLikes(9);
-	    blog.setBlogname("java");
+	    blog.setUsername("mano");
 	    blog.setUserid(2);
 	   
 	    blogDAO.saveOrUpdate(blog);

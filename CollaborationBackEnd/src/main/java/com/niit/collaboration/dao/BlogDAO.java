@@ -19,4 +19,7 @@ public interface BlogDAO {
 	public void insert(Blog blog);
 
 	public Blog getAllBlog(int blogid);
+    public List<Blog> getAcceptedList();
+	
+	public List<Blog> getNotAcceptedList();
 }

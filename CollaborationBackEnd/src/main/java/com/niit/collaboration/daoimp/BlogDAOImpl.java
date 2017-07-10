@@ -74,5 +74,27 @@ public class BlogDAOImpl implements BlogDAO  {
 		return null;
   
 	}
-	
+	@Transactional
+	public List<Blog> getAcceptedList() {
+		// TODO Auto-generated method stub
+		String hql = "from Blog where status = " + "'A'";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		@SuppressWarnings("unchecked")
+		List<Blog> list = (List<Blog>) query.list();
+		
+		return list;
+	}
+
+	@Transactional
+	public List<Blog> getNotAcceptedList() {
+		// TODO Auto-generated method stub
+		String hql = "from Blog where status = " + "'NA'";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		@SuppressWarnings("unchecked")
+		List<Blog> list = (List<Blog>) query.list();
+		
+		return list;
+
+	}
+
 }

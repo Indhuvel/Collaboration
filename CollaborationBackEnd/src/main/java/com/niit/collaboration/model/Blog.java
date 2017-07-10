@@ -18,7 +18,8 @@ public class Blog {
 	@GeneratedValue
 	private int blogid;
 	
-	private String blogname;
+	private String username;
+	private String email;
 	private int userid;
 	private String title;
 	private String description;
@@ -32,11 +33,18 @@ public class Blog {
 	public void setBlogid(int blogid) {
 		this.blogid = blogid;
 	}
-	public String getBlogname() {
-		return blogname;
+	
+	public String getUsername() {
+		return username;
 	}
-	public void setBlogname(String blogname) {
-		this.blogname = blogname;
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public int getUserid() {
 		return userid;

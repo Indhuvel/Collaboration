@@ -65,8 +65,8 @@ public class UserDAOImpl implements UserDAO{
 	}  
 
 	@Transactional
-	public User getByMail(String mail) {
-		String hql = "from User where email ='" + mail + "'";
+	public User getByMail(String email) {
+		String hql = "from User where email ='" + email + "'";
 		Query query = (Query) sessionFactory.getCurrentSession().createQuery(hql);
 		@SuppressWarnings("unchecked")
 		List<User> listUser = (List<User>) (query).list();
