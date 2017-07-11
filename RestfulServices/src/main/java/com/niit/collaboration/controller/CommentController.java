@@ -3,6 +3,9 @@ package com.niit.collaboration.controller;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -53,7 +56,7 @@ public class CommentController {
 	@PostMapping(value = "/comment")
 	public ResponseEntity createComment(@RequestBody Comment comment) {
 		
-		comment.setCommentdate(new Date());
+		comment.setCreatedate(new Date());
 
 		commentDAO.create(comment);
 
@@ -81,5 +84,19 @@ public class CommentController {
 		}
 
 		return new ResponseEntity(comment, HttpStatus.OK);
+	}
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@GetMapping("/comments/{forumid}")
+	public ResponseEntity getForumId(@PathVariable("forumid") int forumid, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		session.setAttribute("forumId", forumid);
+		System.out.println("hai");
+		System.out.println(forumid);
+		List listcomment = (List) commentDAO.getForumComments(forumid);
+		if (listcomment == null) {
+			return new ResponseEntity("No Comment found for ID " + forumid, HttpStatus.NOT_FOUND);
+		}
+
+		return new ResponseEntity(listcomment, HttpStatus.OK);
 	}
 }

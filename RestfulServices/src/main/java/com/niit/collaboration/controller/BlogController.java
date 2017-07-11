@@ -3,6 +3,8 @@ package com.niit.collaboration.controller;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.niit.collaboration.dao.BlogDAO;
 import com.niit.collaboration.model.Blog;
+import com.niit.collaboration.model.User;
 
 @RestController
 public class BlogController {
@@ -40,6 +43,7 @@ public class BlogController {
 		List<Blog> listblog = blogDAO.getNotAcceptedList();
 		return new ResponseEntity<List<Blog>>(listblog, HttpStatus.OK);
 	}
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@PutMapping("/acceptBlog")
 	public ResponseEntity acceptBlog(@RequestBody Blog blog){
 		blog.setStatus("A");
@@ -47,11 +51,15 @@ public class BlogController {
 		return new ResponseEntity(blog, HttpStatus.OK);
 	}
 	@RequestMapping(value ="/insertBlog", method = RequestMethod.POST)
-	public ResponseEntity<String> insertBlog(@RequestBody Blog blog) {
+	public ResponseEntity<String> insertBlog(@RequestBody Blog blog,HttpSession session) {
 		blog.setCreatedate(new Date());
 		blog.setStatus("NA");
-		blog.setLikes(0);
-
+		
+		User user = (User) session.getAttribute("user");   
+		System.out.println(blog.getTitle());
+		blog.setUserid(user.getUserid());
+		blog.setUsername(user.getUsername());
+		blogDAO.saveOrUpdate(blog);
 		blogDAO.insert(blog);
 		return new ResponseEntity<String>("Successfully Inserted", HttpStatus.OK);
 	}
@@ -85,4 +93,15 @@ public class BlogController {
 
 		return new ResponseEntity(blog, HttpStatus.OK);
      }
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@GetMapping("/getByTitle/{title}")
+	public ResponseEntity getByTitle(@PathVariable("title") String title) {
+
+		Blog blog = blogDAO.getByTitle(title);
+		if (blog == null) {
+			return new ResponseEntity("No Blog found for title " + title, HttpStatus.NOT_FOUND);
+		}
+
+		return new ResponseEntity(blog, HttpStatus.OK);
+	}
 }

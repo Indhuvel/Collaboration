@@ -39,11 +39,11 @@ public class ChatController {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@GetMapping("/mychats/{chatid}")
-	public ResponseEntity getByMychatId(@PathVariable("chatid") int chatid) {
+	public ResponseEntity getByMychatId(@PathVariable("chatid") int mychatid) {
 
-		Mychat mychat = mychatDAO.getByMychatid(chatid);
+		Mychat mychat = mychatDAO.getByMychatid(mychatid);
 		if (mychat == null) {
-			return new ResponseEntity("No Chat found for ID " + chatid, HttpStatus.NOT_FOUND);
+			return new ResponseEntity("No Chat found for ID " + mychatid, HttpStatus.NOT_FOUND);
 		}
       return new ResponseEntity(mychat, HttpStatus.OK);
 	}

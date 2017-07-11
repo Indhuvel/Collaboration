@@ -2,6 +2,8 @@ package com.niit.collaboration.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.niit.collaboration.dao.FriendDAO;
 import com.niit.collaboration.model.Friend;
+import com.niit.collaboration.model.User;
 
 @RestController
 public class FriendController {
@@ -50,8 +53,16 @@ public class FriendController {
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@PostMapping(value = "/friend")
-	public ResponseEntity createFreiend(@RequestBody Friend friend) {
+	public ResponseEntity createFriend(@RequestBody Friend friend,HttpSession session) {
 
+		User user = (User) session.getAttribute("user");   
+		friend.setUserid(user.getUserid());
+		friend.setUsername(user.getUsername());
+		friend.setStatus("P");
+		/*friend.setFriendid(friendUser.getId());
+		friend.setFriendname(friendUser.getName());*/
+		friend.setIsOnline("TRUE");
+		
 		friendDAO.saveOrUpdate(friend);
 
 		return new ResponseEntity(friend, HttpStatus.OK);
@@ -94,6 +105,20 @@ public class FriendController {
 		
 		List listuser = friendDAO.getByFriendRequestList(userid);
 		return new ResponseEntity(listuser,HttpStatus.OK);
+	}
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@PutMapping("/friendAccept")
+	public ResponseEntity acceptFriend(@RequestBody Friend friend){
+		
+		friend.setStatus("A");
+		friend = friendDAO.saveOrUpdate(friend);
+		
+		return new ResponseEntity(friend, HttpStatus.OK);
+	}
+	@GetMapping("/friendsAccepted/{name}")  
+	public List<Friend> geByFriendAccepted(@PathVariable("name") String name) {
+		return friendDAO.getByFriendAccepted(name);
+		
 	}
 	
 }

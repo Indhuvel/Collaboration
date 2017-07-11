@@ -3,6 +3,8 @@ package com.niit.collaboration.controller;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.niit.collaboration.dao.ForumDAO;
 import com.niit.collaboration.model.Forum;
+import com.niit.collaboration.model.User;
 
 @RestController
 public class ForumController {
@@ -23,13 +26,7 @@ public class ForumController {
 	@Autowired
 	private ForumDAO forumDAO;
 	
-	public ForumDAO getForumDAO() {
-		return forumDAO;
-	}
-
-	public void setForumDAO(ForumDAO forumDAO) {
-		this.forumDAO = forumDAO;
-	}
+	
 	
 	@GetMapping("/forum")
 	public ResponseEntity<List<Forum>> getForum() {
@@ -50,9 +47,12 @@ public class ForumController {
 	}
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@PostMapping(value = "/forum")
-	public ResponseEntity createForum(@RequestBody Forum forum) {
+	public ResponseEntity createForum(@RequestBody Forum forum,HttpSession session) {
 		forum.setCreatedate(new Date());
-
+		User user = (User) session.getAttribute("user"); 
+		forum.setStatus("NA");
+		forum.setUserid(user.getUserid());
+		forum.setUsername(user.getUsername());
 		forumDAO.saveOrUpdate(forum);
         return new ResponseEntity(forum, HttpStatus.OK);
 	}
@@ -77,6 +77,23 @@ public class ForumController {
 			return new ResponseEntity("No Forum found for ID " + forumid, HttpStatus.NOT_FOUND);
 		}
 
+		return new ResponseEntity(forum, HttpStatus.OK);
+	}
+	@GetMapping("/acceptedforum")
+	public ResponseEntity<List<Forum>> acceptedForumsList() {
+		List<Forum> listforum = forumDAO.getAcceptedList();
+		return new ResponseEntity<List<Forum>>(listforum, HttpStatus.OK);
+	}
+	@GetMapping("/notAcceptedforum")
+	public ResponseEntity<List<Forum>> notAcceptedForumList() {
+		List<Forum> listforum = forumDAO.getNotAcceptedList();
+		return new ResponseEntity<List<Forum>>(listforum, HttpStatus.OK);
+	}
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@PutMapping("/acceptForum")
+	public ResponseEntity acceptForum(@RequestBody Forum forum){
+		forum.setStatus("A");
+		forumDAO.saveOrUpdate(forum);
 		return new ResponseEntity(forum, HttpStatus.OK);
 	}
 

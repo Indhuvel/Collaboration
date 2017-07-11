@@ -82,7 +82,7 @@ public class UserController {
 
 		return new ResponseEntity(user, HttpStatus.OK);
 	}
-
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@GetMapping("/user/{email}")
 	public ResponseEntity<User> getByMail(@PathVariable("email") String email) {
 
