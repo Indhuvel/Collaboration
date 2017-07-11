@@ -36,11 +36,20 @@ app.config(function($routeProvider) {
 			controllerAs : 'jc'
 	})
 
-	
+	.when('/forum', {
+		templateUrl : 'Forum/Forum.html',
+		controller : 'ForumController',
+			controllerAs : 'fc'
+	})
+     .when('/viewforum', {
+		templateUrl : 'Forum/ViewForum.html',
+		controller : 'ForumController',
+			controllerAs : 'fc'
+	})
     .when('/friend', {
 		templateUrl : 'Friend/friends.html',
 		controller : 'FriendController',
-		controllerAs : 'fc'
+		controllerAs : 'frc'
 
 	})
 	

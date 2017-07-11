@@ -23,7 +23,8 @@
 <script type="text/javascript" src="Blog/BlogService.js"></script>
 <script type="text/javascript" src="Job/JobController.js"></script>
 <script type="text/javascript" src="Job/JobService.js"></script>
-
+<script type="text/javascript" src="Forum/ForumController.js"></script>
+<script type="text/javascript" src="Forum/ForumService.js"></script>
 
 </head>
 <body ng-app="myApp" ng-controller="UserController as uc">
@@ -69,12 +70,17 @@
 							<li><a href="#!job">Post Job</a></li>
 							<li><a href="#!view_applied_jobs">View Job</a></li>
 						</ul></li>
-					<li><a href="#">Events</a></li>
-					<li  class="dropdown"><a data-toggle="dropdown" href="#">Chat Forums<span
+						<li class="dropdown"><a data-toggle="dropdown" href="#">Forums<span
+							class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="#!viewforum">View</a></li>
+							<li><a href="#!forum">Add</a></li>
+						</ul></li>
+					<!-- <li  class="dropdown"><a data-toggle="dropdown" href="#">Chat Forums<span
 							class="caret"></span></a>
 							<ul class="dropdown-menu">	
 							<li><a href="#">Group</a></li>
-							</ul></li>
+							</ul></li> -->
 				</ul>
 
          <ul class="nav navbar-nav navbar-right">

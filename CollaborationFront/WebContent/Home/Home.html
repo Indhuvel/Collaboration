@@ -21,9 +21,10 @@ box-shadow: 0 0 10px #ccc;
 <h3>Blogs</h3>
 <div ng-init="bc.AcceptedBlogs()">
 <div class="abc" ng-repeat="u in bc.blogsAccept">
-<h3>TITLE: <span ng-bind="u.title"></span></h3> <h6>Authored By:<span ng-bind="u.username"></span></h6> 
-<h6>STATUS: <span ng-bind="u.status"></</span></h6>
-<h3>DESC: <span ng-bind="u.description"></span></h3>
+<h3>Title: <span ng-bind="u.title"></span></h3> 
+<h6>Authored By:<span ng-bind="u.username"></span></h6> 
+<h6>Status: <span ng-bind="u.status"></</span></h6>
+<h3>Desc: <span ng-bind="u.description"></span></h3>
 <a href="" ng-click="bc.get(u)"><input type="button" name="button"  value="Read More"/></a>
 <hr>
 </div>
@@ -33,15 +34,26 @@ box-shadow: 0 0 10px #ccc;
 <div class="column-content-region col-sm-3" style="margin-left: 4em;" ng-controller="JobController as jc">
 <h3>Jobs</h3>
 <div class="abc" ng-repeat="jo in jc.jobs"> 
-<h1><span ng-bind="jo.title"></span></h1><h6>Company Name:<span ng-bind="jo.companyName"></span></h6>
+<h3><span ng-bind="jo.title"></span></h3>
+<h6>Company Name:<span ng-bind="jo.companyname"></span></h6>
 <h3><span ng-bind="jo.qualification"></span></h3><h3><span ng-bind="jo.status"></span></h3>
-<h2>Knowledge Reqd:<span ng-bind="jo.technicalKnowledge"></span></h2>
+<!-- <h3>Knowledge Reqd:<span ng-bind="jo.technicalKnowledge"></span></h3> -->
  <h6>Created On:<span ng-bind="jo.timeStamp"></span></h6>
 <a href="" ng-click="jc.get(jo)"><input type="button" name="button"  value="Read More"/></a>
 <hr>
 </div>
 </div></div>
 
+<div class="column-content-region col-sm-3"  ng-controller="ForumController as fc">
+<h3>Forums</h3>
+<div ng-init="fc.AcceptedForums()">
+<div class="abc" ng-repeat="for in fc.forumsAccept" >
+<h3><span ng-bind="for.forumname"></span></h3> 
+<h6>Created On:<span ng-bind="for.timeStamp"></span></h6> 
+<h5><span ng-bind="for.forumcontent" | limitTo : 25"></span></h5>
+<a href="" ng-click="fc.get(for)"><input type="button" name="button"  value="Read More"/></a>
+<hr>
 </div>
-</body>
+</div>
+</div>
 </html>

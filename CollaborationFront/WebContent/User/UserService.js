@@ -4,7 +4,7 @@ app.service('UserService', ['$http', '$q','$rootScope', function($http, $q,$root
 	
 	console.log("UserService...")
 	
-	var BASE_URL='http://localhost:8792/RestfulServices';
+ var BASE_URL = 'http://localhost:8086/RestfulServices'	;	
     return {
          
             fetchAllUsers: function() {
@@ -18,7 +18,7 @@ app.service('UserService', ['$http', '$q','$rootScope', function($http, $q,$root
                             );
             },
             
-           myProfile: function() {
+            myProfile: function() {
             	console.log("calling myProfile ")
                     return $http.get(BASE_URL+'/myProfile')
                             .then(
@@ -56,7 +56,7 @@ app.service('UserService', ['$http', '$q','$rootScope', function($http, $q,$root
              
             createUser: function(user){
             	console.log("calling create user")
-                    return $http.post(BASE_URL+'/user/', user) //1
+                    return $http.post(BASE_URL+'/user', user) //1
                             .then(
                                     function(response){
                                         return response.data;
@@ -97,7 +97,8 @@ app.service('UserService', ['$http', '$q','$rootScope', function($http, $q,$root
         
             
             authenticate: function(user){
-            	   console.log("Calling the method authenticate with the user :"+user)          		 
+            	   console.log("Calling the method authenticate with the user :"+user)
+          		 
                 return $http.post(BASE_URL+'/login',user)
                         .then(
                                 function(response){

@@ -12,25 +12,26 @@ app.controller('BlogController',['$scope', '$location', 'BlogService','$rootScop
     self.remove = remove;
     self.reset = reset;
     self.get = get;
+    self.AcceptedBlogs = AcceptedBlogs;
+	
     
     fetchAllBlogs();
     AcceptedBlogs();
     reset();
+    
     function fetchAllBlogs(){
     	BlogService.fetchAllBlogs()
-            .then(
-            function(d) {
+            .then(function(d) {
                 self.blogs = d;
             },
             function(errResponse){
                 console.error('Error while fetching Blogs');
-            }
-        );
+            });
     }
     function AcceptedBlogs() {
 		console.log("AcceptedBlogs...")
 		BlogService.AcceptedBlogs().then(function(d) {
-							//alert("Thank you for creating message")
+							
 			console.log(d)
 							self.blogsAccept = d;
 						},
@@ -95,7 +96,7 @@ app.controller('BlogController',['$scope', '$location', 'BlogService','$rootScop
     function submit() {
         console.log('Creating New Blog', self.blog);
            createBlog(self.blog);
-       
+           reset();
    };
     function reset(){
     	self.blog={blogid : 'null',blogname:'',title : '',status : '',description : '',createdate : '',username:'',likes:'',userid:''};

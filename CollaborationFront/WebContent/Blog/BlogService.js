@@ -2,7 +2,7 @@
  
 app.service('BlogService', ['$http', '$q', function($http, $q){
 	console.log("blogService...")
-    var BASE_URL = 'http://localhost:8792/RestfulServices';
+    var BASE_URL = 'http://localhost:8086/RestfulServices';
 
 	 var factory = {
 		        fetchAllBlogs: fetchAllBlogs,

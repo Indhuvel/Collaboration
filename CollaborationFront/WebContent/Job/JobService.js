@@ -4,7 +4,7 @@ app.service('JobService', ['$http', '$q','$rootScope', function($http, $q,$rootS
 	
 	console.log("JobService...")
 	
-    var BASE_URL = 'http://localhost:8792/RestfulServices';
+    var BASE_URL = 'http://localhost:8086/RestfulServices';
 		
     return {
          
