@@ -33,9 +33,9 @@ public class ForumDAOTestCase {
 	@Test
 	public void createForumTestCase() {
 
-		forum.setForumname("Discussion board");
+		forum.setForumcontent("Discussion board");
 	  	forum.setStatus("college system will change");
-	  	forum.setForumcontent("content");
+	  	forum.setForumname("forumname");
 	  	forumDAO.saveOrUpdate(forum);
 
 	}

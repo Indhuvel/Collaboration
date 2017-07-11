@@ -40,9 +40,9 @@ public class MychatDAOImpl implements MychatDAO {
 	}
 	
 	@Transactional
-	public void delete(int mychatId) {
+	public void delete(int mychatid) {
 		Mychat mychatToDelete = new Mychat();
-		mychatToDelete.setChatid(mychatId);
+		mychatToDelete.setChatid(mychatid);
 		sessionFactory.getCurrentSession().delete(mychatToDelete);
    }
 	
@@ -71,6 +71,12 @@ public class MychatDAOImpl implements MychatDAO {
 	public void insert(Mychat mychat) {
 		sessionFactory.getCurrentSession().saveOrUpdate(mychat);
 		
+	}
+
+	public Mychat getByFriendId(int mychatid) {
+		Mychat mychatListByID = (Mychat) sessionFactory.getCurrentSession().get(Mychat.class, mychatid);
+
+		return mychatListByID;
 	}
 
 

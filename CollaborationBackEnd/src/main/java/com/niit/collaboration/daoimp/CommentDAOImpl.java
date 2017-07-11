@@ -31,8 +31,8 @@ public class CommentDAOImpl implements CommentDAO{
 	}
 	
 	@Transactional
-	public Comment getForumComments(String forumId) {
-		String hql = "from Comment where forumid ='" + forumId + "'";
+	public Comment getForumComments(int forumid) {
+		String hql = "from Comment where forumid ='" + forumid + "'";
 		org.hibernate.Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		@SuppressWarnings("unchecked")
 		List<Comment> listComment = (List<Comment>) query.list();

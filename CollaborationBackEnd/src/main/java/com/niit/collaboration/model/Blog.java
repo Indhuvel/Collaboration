@@ -1,5 +1,7 @@
 package com.niit.collaboration.model;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -26,7 +28,8 @@ public class Blog {
     private Date createdate;
 	private String status;
 	private int likes;
-	
+	private String timeStamp = new SimpleDateFormat("yyyy/MM/dd_HH:mm:ss").format(Calendar.getInstance().getTime());
+
 	public int getBlogid() {
 		return blogid;
 	}
@@ -81,6 +84,12 @@ public class Blog {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public String getTimeStamp() {
+		return timeStamp;
+	}
+	public void setTimeStamp(String timeStamp) {
+		this.timeStamp = timeStamp;
 	}
 	
 	

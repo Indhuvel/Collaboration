@@ -1,5 +1,7 @@
 package com.niit.collaboration.model;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -18,10 +20,13 @@ public class Job {
 	@Id
 	@GeneratedValue
     private int jobid;	
-	private String jobprofile;
-	private String jobdesc;
+	private String title;
+	private String companyname;
 	private String qualification;
 	private String status;
+	private String email;
+	private String timeStamp = new SimpleDateFormat("yyyy/MM/dd_HH:mm:ss").format(Calendar.getInstance().getTime());
+
 	@Column(name="postdate")
     private Date postdate;
     
@@ -31,17 +36,18 @@ public class Job {
 	public void setJobid(int jobid) {
 		this.jobid = jobid;
 	}
-	public String getJobprofile() {
-		return jobprofile;
+	
+	public String getTitle() {
+		return title;
 	}
-	public void setJobprofile(String jobprofile) {
-		this.jobprofile = jobprofile;
+	public void setTitle(String title) {
+		this.title = title;
 	}
-	public String getJobdesc() {
-		return jobdesc;
+	public String getCompanyname() {
+		return companyname;
 	}
-	public void setJobdesc(String jobdesc) {
-		this.jobdesc = jobdesc;
+	public void setCompanyname(String companyname) {
+		this.companyname = companyname;
 	}
 	public String getQualification() {
 		return qualification;
@@ -69,6 +75,18 @@ public class Job {
 			postdate=new Date(System.currentTimeMillis());
 		}
 		this.postdate = postdate;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getTimeStamp() {
+		return timeStamp;
+	}
+	public void setTimeStamp(String timeStamp) {
+		this.timeStamp = timeStamp;
 	}
 
     

@@ -10,11 +10,15 @@ public interface MychatDAO {
 
 	public Mychat saveOrUpdate(Mychat mychat);
 	
-    public void delete (int mychatId);
+    public void delete (int mychatid);
 	
-	public Mychat getByMychatid(int mychatid);
+	public Mychat getByFriendId(int mychatid);
 
 	public Mychat getAllMychat(int mychatid);
 
 	public void insert(Mychat mychat);
+
+	public Mychat getByMychatid(int mychatid);
+	
+
 }

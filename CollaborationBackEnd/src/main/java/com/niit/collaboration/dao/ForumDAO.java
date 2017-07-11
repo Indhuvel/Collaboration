@@ -14,4 +14,10 @@ public interface ForumDAO {
 	public Forum getByForumid(int forumid);
 	
 	public Forum getByUsername(String username);
+	
+	public List<Forum> getAcceptedList();
+	
+	public List<Forum> getNotAcceptedList();
+
+
 }

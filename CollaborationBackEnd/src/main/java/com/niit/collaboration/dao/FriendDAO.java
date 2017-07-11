@@ -17,4 +17,8 @@ public interface FriendDAO {
 	public List<Friend> getByFriendRequestList(int userid);
 
 	public List<Friend> FriendList(int userid);
+
+	public List<Friend> getByFriendName(String name);
+	
+	public List<Friend> getByFriendAccepted(String name);
 }

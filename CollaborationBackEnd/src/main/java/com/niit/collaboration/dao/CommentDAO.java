@@ -8,7 +8,7 @@ public interface CommentDAO {
 	
     public List<Comment> list();
 	
-	public Comment getForumComments(String forumId);
+	public Comment getForumComments(int forumid);
 	
 	public Comment getComment(int commentid);
 	

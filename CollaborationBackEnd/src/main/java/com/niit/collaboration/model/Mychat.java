@@ -1,5 +1,7 @@
 package com.niit.collaboration.model;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -20,15 +22,8 @@ public class Mychat {
 	private String sender;
 	private String receiver;
 	private String message;
-	
-	
-	
-    private int blogid;
-    private String username;
-    private int userid;
-    private int forumid;
+	private String timeStamp = new SimpleDateFormat("yyyy/MM/dd_HH:mm:ss").format(Calendar.getInstance().getTime());   
     private Date commentdate;
-    private String usercomment;
 	
     
     public int getChatid() {
@@ -37,31 +32,7 @@ public class Mychat {
 	public void setChatid(int chatid) {
 		this.chatid = chatid;
 	}
-	public int getBlogid() {
-		return blogid;
-	}
-	public void setBlogid(int blogid) {
-		this.blogid = blogid;
-	}
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
 	
-	public int getUserid() {
-		return userid;
-	}
-	public void setUserid(int userid) {
-		this.userid = userid;
-	}
-	public int getForumid() {
-		return forumid;
-	}
-	public void setForumid(int forumid) {
-		this.forumid = forumid;
-	}
 	public Date getCommentdate() {
 		return commentdate;
 	}
@@ -69,12 +40,6 @@ public class Mychat {
 		this.commentdate = commentdate;
 	}
 	
-	public String getUsercomment() {
-		return usercomment;
-	}
-	public void setUsercomment(String usercomment) {
-		this.usercomment = usercomment;
-	}
 	public String getSender() {
 		return sender;
 	}
@@ -92,6 +57,12 @@ public class Mychat {
 	}
 	public void setMessage(String message) {
 		this.message = message;
+	}
+	public String getTimeStamp() {
+		return timeStamp;
+	}
+	public void setTimeStamp(String timeStamp) {
+		this.timeStamp = timeStamp;
 	}
 	
 	

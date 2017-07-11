@@ -1,5 +1,7 @@
 package com.niit.collaboration.model;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -16,6 +18,12 @@ public class Friend {
 	@GeneratedValue
 	private int friendid;
 	private int userid;
+	private String username;
+    private String friendname;
+	
+	private String isOnline;
+	
+	private Date lastSeen;
 	private String status;
 	
 	public int getFriendid() {
@@ -35,6 +43,30 @@ public class Friend {
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getFriendname() {
+		return friendname;
+	}
+	public void setFriendname(String friendname) {
+		this.friendname = friendname;
+	}
+	public String getIsOnline() {
+		return isOnline;
+	}
+	public void setIsOnline(String isOnline) {
+		this.isOnline = isOnline;
+	}
+	public Date getLastSeen() {
+		return lastSeen;
+	}
+	public void setLastSeen(Date lastSeen) {
+		this.lastSeen = lastSeen;
 	}
 
 	

@@ -35,8 +35,8 @@ public class JobDAOTestCase {
 	public void createJobTestCase() {
 
 		job.setQualification("BE");
-	   	job.setJobprofile("company ntt data, qualification BE, Address coimbatore");
-	   	job.setJobdesc("software developer");
+	   	job.setCompanyname("CTS");
+	   	job.setTitle("software developer");
 	   	jobDAO.saveOrUpdate(job);
 
 	}
