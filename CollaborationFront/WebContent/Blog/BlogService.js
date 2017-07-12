@@ -9,8 +9,8 @@ app.service('BlogService', ['$http', '$q', function($http, $q){
 		        createBlog: createBlog,
 		        updateBlog:updateBlog,
 		        AcceptedBlogs : AcceptedBlogs,
-/*				notAcceptedBlogs : notAcceptedBlogs,
-				accept: accept,*/
+				notAcceptedBlogs : notAcceptedBlogs,
+				/*accept: accept,*/
 		        deleteBlog:deleteBlog
 		    };
 		 
@@ -30,6 +30,16 @@ app.service('BlogService', ['$http', '$q', function($http, $q){
 							console.log('response');
 							return response.data;
 							console.log(response)
+						}, null);
+			};
+			function notAcceptedBlogs() {
+				console.log("calling notAcceptedBlogs ")
+
+				return $http.get(BASE_URL +'/notAcceptedblog').then(
+						function(response) {
+							console.log(response)
+							return response.data;
+
 						}, null);
 			};
 			

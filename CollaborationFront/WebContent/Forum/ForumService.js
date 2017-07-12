@@ -13,8 +13,8 @@ app.service('ForumService', ['$http','$q','$rootScope',
 			        createForum: createForum,
 			        updateForum:updateForum,
 			        AcceptedForums:AcceptedForums,
-			        /*notAcceptedForums:notAcceptedForums,
-			        accept: accept,*/
+			        notAcceptedForums:notAcceptedForums,
+			       /* accept: accept,*/
 			        deleteForumRequest:deleteForumRequest
 			    };
 			 
@@ -38,7 +38,7 @@ app.service('ForumService', ['$http','$q','$rootScope',
 							}, null);
 				};
 
-			/*	function notAcceptedForums() {
+				function notAcceptedForums() {
 					console.log("calling notAcceptedForums ")
 
 					return $http.get(BASE_URL + '/notAcceptedforum').then(
@@ -47,7 +47,7 @@ app.service('ForumService', ['$http','$q','$rootScope',
 								return response.data;
 
 							}, null);
-				};*/
+				};
 
 				function createForum(forum){
 					console.log("calling create Forum")

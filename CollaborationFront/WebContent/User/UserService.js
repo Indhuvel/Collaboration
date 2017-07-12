@@ -10,8 +10,7 @@ app.service('UserService', ['$http', '$q','$rootScope', function($http, $q,$root
             fetchAllUsers: function() {
             	console.log("calling fetchAllUsers ")
                     return $http.get(BASE_URL+'/user')
-                            .then(
-                                    function(response){
+                            .then(function(response){
                                         return response.data;
                                     }, 
                                    null
@@ -21,8 +20,7 @@ app.service('UserService', ['$http', '$q','$rootScope', function($http, $q,$root
             myProfile: function() {
             	console.log("calling myProfile ")
                     return $http.get(BASE_URL+'/myProfile')
-                            .then(
-                                    function(response){
+                            .then(function(response){
                                         return response.data;
                                     }, 
                                    null
@@ -32,8 +30,7 @@ app.service('UserService', ['$http', '$q','$rootScope', function($http, $q,$root
             accept: function(id) {
             	console.log("calling approve ")
                     return $http.get(BASE_URL+'/accept/'+id)
-                            .then(
-                                    function(response){
+                            .then(function(response){
                                         return response.data;
                                     }, 
                                     function(errResponse){
@@ -46,8 +43,7 @@ app.service('UserService', ['$http', '$q','$rootScope', function($http, $q,$root
             reject: function(id, reason) {
             	console.log("calling reject ")
                     return $http.get(BASE_URL+'/reject/'+id+'/'+reason)
-                            .then(
-                                    function(response){
+                            .then(function(response){
                                         return response.data;
                                     }, 
                                     null
@@ -57,8 +53,7 @@ app.service('UserService', ['$http', '$q','$rootScope', function($http, $q,$root
             createUser: function(user){
             	console.log("calling create user")
                     return $http.post(BASE_URL+'/user', user) //1
-                            .then(
-                                    function(response){
+                            .then(function(response){
                                         return response.data;
                                     }, 
                                     function(errResponse){
@@ -71,8 +66,7 @@ app.service('UserService', ['$http', '$q','$rootScope', function($http, $q,$root
             updateUser: function(user, id){
             	console.log("calling fetchAllUsers ")
                     return $http.put(BASE_URL+'/user/', user)  //2
-                            .then(
-                                    function(response){
+                            .then(function(response){
                                         return response.data;
                                     }, 
                                     function(errResponse){
@@ -86,8 +80,7 @@ app.service('UserService', ['$http', '$q','$rootScope', function($http, $q,$root
             logout: function(){
             	console.log('logout....')
                 return $http.get(BASE_URL+'/user/logout')
-                        .then(
-                                function(response){
+                        .then(function(response){
                                     return response.data;
                                 }, 
                               null
@@ -100,8 +93,7 @@ app.service('UserService', ['$http', '$q','$rootScope', function($http, $q,$root
             	   console.log("Calling the method authenticate with the user :"+user)
           		 
                 return $http.post(BASE_URL+'/login',user)
-                        .then(
-                                function(response){
+                        .then(function(response){
                                     return response.data;   //user json object
                                 }, 
                                null

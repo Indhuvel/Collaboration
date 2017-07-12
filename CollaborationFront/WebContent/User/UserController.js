@@ -1,39 +1,17 @@
 'use strict';
 
-app.controller('UserController',[
-						'$scope',
-						'UserService',
-						'$location',
-						'$rootScope',
-						'$cookieStore',
-						'$http',
-						function($scope, UserService, $location, $rootScope,$cookieStore, $http) {
+app.controller('UserController',['$scope','UserService','$location','$rootScope','$cookieStore','$http','$cookies',
+						function($scope, UserService, $location, $rootScope,$cookieStore, $http,$cookies) {
 							console.log("UserController...")
 							var self = this;
-							self.user = {
-									userid : '',
-									username : '',
-								password : '',
-								contact : '',
-								address : '',
-								isOnline : '',
-								role : '',
-								errorCode : '',
-								errorMessage : ''
+							self.user = {userid : '',username : '',password : '',contact : '',address : '',isOnline : '',role : '',
+								errorCode : '',errorMessage : ''
 							};
 
 							self.userLoggedIn = "";
 
-							self.currentUser = {
-									userid : '',
-									username : '',
-								password : '',
-								contact : '',
-								address : '',
-                                isOnline : '',
-								role : '',
-								errorCode : '',
-								errorMessage : ''
+						self.currentUser = {userid : '',username : '',password : '',contact : '',address : '',isOnline : '',role : '',
+							    errorCode : '',errorMessage : ''
 
 							};
 
@@ -42,13 +20,14 @@ app.controller('UserController',[
 							$scope.orderByMe = function(x) {
 								$scope.myOrderBy = x;
 							}
-
+							
+							var currentLoginUser = $cookies.getObject('currentLoginUser');
+							console.log(currentLoginUser);
+							
 							self.fetchAllUsers = function() {
 								console.log("fetchAllUsers...")
-								UserService
-										.fetchAllUsers()
-										.then(
-												function(d) {
+								UserService.fetchAllUsers()
+										.then(function(d) {
 													self.users = d;
 													$rootScope.users = d;
 												},
@@ -61,11 +40,10 @@ app.controller('UserController',[
 
 							self.createUser = function(user) {
 								console.log("createUser...")
-								UserService
-										.createUser(user)
+								UserService.createUser(user)
 										.then(function(d) {
 													alert("Thank you for registration")
-													$location.path("/login")
+													$location.path('/login')
 												},
 												function(errResponse) {
 													console.error('Error while creating User.');
@@ -90,8 +68,7 @@ app.controller('UserController',[
 										.then(function(d) {
 													self.user = d;
 													self.fetchAllUsers
-													$location
-															.path("/manage_users")
+													$location.path("/manage_users")
 													alert(self.user.errorMessage)
 
 												},
@@ -130,16 +107,10 @@ app.controller('UserController',[
 
 							self.authenticate = function(user) {
 								console.log("authenticate...")
-								UserService
-										.authenticate(user)
-										.then(
-
-												function(d) {
-
-													self.user = d;
-													console
-															.log("user.errorCode: "
-																	+ self.user.errorCode)
+								UserService.authenticate(user)
+										.then(function(d) {
+                                                    self.user = d;
+													console.log("user.errorCode: "+ self.user.errorCode)
 													if (self.user.errorCode == "404")
 
 													{
@@ -147,38 +118,31 @@ app.controller('UserController',[
 
 														self.user.id = "";
 														self.user.password = "";
+														$location.path('/');
 
 													} else { // valid
 														// credentials
-														console
-																.log("Valid credentials. Navigating to home page")
+														console.log("Valid credentials. Navigating to home page")
 														self.userLoggedIn = "true"
 														if (self.user.role == "admin") {
-															console
-																	.log("You are admin")
-															self
-																	.fetchAllUsers();
+															console.log("You are admin")
+															 $location.path('/admin')
+															//self.fetchAllUsers();
 														}
 
-														console
-																.log('Current user : '
-																		+ self.user)
+														console.log('Current user : '+ self.user)
 														$rootScope.currentUser = self.user
-														$cookieStore.put(
-																'currentUser',
-																self.user);
-
-														$http.defaults.headers.common['Authorization'] = 'Basic '
-																+ $rootScope.currentUser;
-														$location.path('/');
-
+														$cookieStore.put('currentUser',self.user);
+														
+														/*$http.defaults.headers.common['Authorization'] = 'Basic '
+																+ $rootScope.currentUser;*/
+														
 													}
 
 												},
 												function(errResponse) {
 
-													console
-															.error('Error while authenticate Users');
+													console.error('Error while authenticate Users');
 												});
 							};
 
@@ -188,14 +152,13 @@ app.controller('UserController',[
 								$rootScope.currentUser = {};
 								$cookieStore.remove('currentUser');
 								UserService.logout()
-								$location.path('/');
+								$location.path('/login');
 
 							}
 
 							// self.fetchAllUsers(); //calling the method
 
-							// better to call fetchAllUsers -> after login ???
-
+						
 							self.login = function() {
 								{
 									console.log('login validation????????',
@@ -214,18 +177,11 @@ app.controller('UserController',[
 							};
 
 							self.reset = function() {
-								self.user = {
-										userid : '',
-										username : '',
-									password : '',
-									contact : '',
-									address : '',
-	                                isOnline : '',
-									role : '',
-									errorCode : '',
-									errorMessage : ''
+								self.user = {userid : '',username : '',password : '',contact : '',address : '',isOnline : '',role : '',
+									errorCode : '',errorMessage : ''
 								};
 								/*$scope.myForm.$setPristine();*/ // reset Form
+								self.users = [];
 							};
 
 						} ]);

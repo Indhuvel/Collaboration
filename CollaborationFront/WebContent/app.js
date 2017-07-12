@@ -18,6 +18,15 @@ app.config(function($routeProvider) {
 			controllerAs: 'ctrl'
 
 	})
+	.when('/admin', {
+		templateUrl : 'Admin/AdminPage.html'
+
+	})
+	.when('/adminBlog', {
+		templateUrl : 'Admin/BlogDetails.html',
+		controller : 'BlogController',
+		controllerAs : 'bcc'
+	})
 	.when('/blog', {
 		templateUrl : 'Blog/Blog.html',
 		controller : 'BlogController',
@@ -56,4 +65,61 @@ app.config(function($routeProvider) {
 	.otherwise({
 		resirectTo : '/'
 	});
+});
+
+app.run( function ($rootScope, $location,$cookieStore, $http) {
+
+	 $rootScope.$on('$locationChangeStart', function (event, next, current) {
+		 console.log("$locationChangeStart")
+		
+		 var userPages = ['/myProfile','/create_blog','/add_friend','/search_friend','/view_friend', '/viewFriendRequest','/chat']
+		 var adminPages = ["/post_job","/manage_users"]
+		 
+		
+		 var currentPage = $location.path()
+		 
+		
+		 var isUserPage = $.inArray(currentPage, userPages)
+		 var isAdminPage = $.inArray(currentPage, adminPages)
+		 
+		 var isLoggedIn = $rootScope.currentUser.id;
+	        
+	     console.log("isLoggedIn:" +isLoggedIn)
+	     console.log("isUserPage:" +isUserPage)
+	     console.log("isAdminPage:" +isAdminPage)
+	        
+	        if(!isLoggedIn)
+	        	{
+	        	
+	        	 if (isUserPage===0 || isAdminPage ===0) {
+		        	  console.log("Navigating to login page:")
+		        	  alert("You need to loggin to do this operation")
+
+						            $location.path('/');
+		                }
+	        	}
+	        
+			 else
+	        	{
+	        	
+				 var role = $rootScope.currentUser.role;
+				 
+				 if(isAdminPage===0 && role!='admin' )
+					 {
+					 
+					  alert("You can not do this operation as you are logged as : " + role )
+					   $location.path('/');
+					 
+					 }}}
+				     
+	        	
+	        	      );
+	 
+	 
+	 
+    $rootScope.currentUser = $cookieStore.get('currentUser') || {};
+    if ($rootScope.currentUser) {
+        $http.defaults.headers.common['Authorization'] = 'Basic' + $rootScope.currentUser; 
+    }
+
 });

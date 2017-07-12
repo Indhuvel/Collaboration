@@ -28,10 +28,13 @@
 
 </head>
 <body ng-app="myApp" ng-controller="UserController as uc">
+<br>
+<br>
 
-<p ng-hide="currentUser.name"> <br><br><br></p>
 
-<h2  ng-show="currentUser.name">Welcome {{currentUser.name}} You Are Here An {{currentUser.role}}</h2>
+<p ng-hide="currentUser.username"> <br><br><br></p>
+
+<h2  ng-show="currentUser.username">Welcome {{currentUser.username}}, You Are Here As a {{currentUser.role}}</h2>
 	
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 
@@ -67,14 +70,14 @@
 							class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="#!search_job">Search Job</a></li>
-							<li><a href="#!job">Post Job</a></li>
+							<li><a href="#!job" ng-show="currentUser.role=='ADMIN'">Post Job</a></li>
 							<li><a href="#!view_applied_jobs">View Job</a></li>
 						</ul></li>
 						<li class="dropdown"><a data-toggle="dropdown" href="#">Forums<span
 							class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="#!viewforum">View</a></li>
-							<li><a href="#!forum">Add</a></li>
+							<li><a href="#!forum"ng-show="currentUser.role!='ADMIN'">Add</a></li>
 						</ul></li>
 					<!-- <li  class="dropdown"><a data-toggle="dropdown" href="#">Chat Forums<span
 							class="caret"></span></a>
@@ -85,12 +88,12 @@
 
          <ul class="nav navbar-nav navbar-right">
 
-					<li><a href="#!login" ng-hide="currentUser.name"><span
+					<li><a href="#!login" ng-hide="currentUser.username"><span
 							class="glyphicon glyphicon-log-in"></span>Sign In</a></li>
-					<li><a href="#!register" ng-hide="currentUser.name"><span
+					<li><a href="#!register" ng-hide="currentUser.username"><span
 							class="glyphicon glyphicon-user"></span>Register</a></li>
 
-					<li><a href="#" ng-click="uc.logout()" ng-show="currentUser.name">
+					<li><a href="#" ng-click="uc.logout()" ng-show="currentUser.username">
 					<span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
 
 				</ul>

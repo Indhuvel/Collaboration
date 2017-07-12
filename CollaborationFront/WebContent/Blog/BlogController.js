@@ -13,7 +13,8 @@ app.controller('BlogController',['$scope', '$location', 'BlogService','$rootScop
     self.reset = reset;
     self.get = get;
     self.AcceptedBlogs = AcceptedBlogs;
-	
+    self.notAcceptedBlogs = notAcceptedBlogs;
+    self.adminGet = adminGet;
     
     fetchAllBlogs();
     AcceptedBlogs();
@@ -39,6 +40,19 @@ app.controller('BlogController',['$scope', '$location', 'BlogService','$rootScop
 							console.error('Error while creating AcceptedBlogs.');
 						});
 	};
+	function notAcceptedBlogs() {
+		console.log("notAcceptedBlogs...")
+		BlogService.notAcceptedBlogs().then(function(d) {
+							
+			console.log(d)
+							self.blogsNotAccepted = d;
+							console.log(self.blogsNotAccepted)
+						},
+						function(errResponse) {
+							console.error('Error while creating notAcceptedBlogs.');
+						});
+	};
+	
     function createBlog(blog){
 		console.log("createBlog...")
 		BlogService.createBlog(blog).then(function(d) {
@@ -90,8 +104,14 @@ app.controller('BlogController',['$scope', '$location', 'BlogService','$rootScop
     	$scope.bc=blog;
 		console.log($scope.bc);
 		$rootScope.blog=$scope.bc;
-		$location.path("viewBlog");
+		$location.path("ViewBlog");
     	
+	}
+    function adminGet(blogs){
+		$scope.bvv=blogs;
+		console.log($scope.bvv);
+		$rootScope.ViewBlogs=$scope.bvv;
+		$location.path("/adminBlog");
 	}
     function submit() {
         console.log('Creating New Blog', self.blog);
