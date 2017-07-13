@@ -27,6 +27,11 @@ app.config(function($routeProvider) {
 		controller : 'BlogController',
 		controllerAs : 'bcc'
 	})
+	.when('/adminForum', {
+		templateUrl : 'Admin/ForumDetails.html',
+		controller : 'ForumController',
+		controllerAs : 'fcc'
+	})
 	.when('/blog', {
 		templateUrl : 'Blog/Blog.html',
 		controller : 'BlogController',
@@ -38,6 +43,11 @@ app.config(function($routeProvider) {
 		controller : 'BlogController',
 		controllerAs : 'bc'
 
+	})
+	.when('/viewBlog', {
+		templateUrl : 'Blog/ViewDetails.html',
+		controller : 'BlogController',
+		controllerAs : 'bc'
 	})
 	.when('/job', {
 		templateUrl : 'Job/Job.html',

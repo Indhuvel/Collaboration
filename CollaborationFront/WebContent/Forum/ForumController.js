@@ -13,9 +13,10 @@ app.controller('ForumController', ['$scope','ForumService','$location','$rootSco
 	
 	self.forums = [];
 	self.submit = submit;
-	
+	 self.accept = accept;
 	 self.AcceptedForums = AcceptedForums;
 	 self.notAcceptedForums = notAcceptedForums;
+	 self.adminGet = adminGet;
 	 
 	 fetchAllForums();
 		AcceptedForums();
@@ -104,6 +105,12 @@ app.controller('ForumController', ['$scope','ForumService','$location','$rootSco
 			}
 			
 		};
+		function adminGet(forums){
+			$scope.fvv=forums;
+			console.log($scope.fvv);
+			$rootScope.viewForums=$scope.fvv;
+			$location.path("/adminForum");
+		}
 		 function submit() {
 				{
 					console.log('Saving New Forum', self.forum);

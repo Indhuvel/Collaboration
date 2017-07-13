@@ -8,13 +8,14 @@ app.controller('BlogController',['$scope', '$location', 'BlogService','$rootScop
 	
 	self.blogs = [];
 	self.submit = submit;
-    self.edit = edit;
-    self.remove = remove;
-    self.reset = reset;
+   
     self.get = get;
+   
     self.AcceptedBlogs = AcceptedBlogs;
     self.notAcceptedBlogs = notAcceptedBlogs;
     self.adminGet = adminGet;
+    self.accept = accept;
+    self.rejectBlog = rejectBlog;
     
     fetchAllBlogs();
     AcceptedBlogs();
@@ -57,7 +58,7 @@ app.controller('BlogController',['$scope', '$location', 'BlogService','$rootScop
 		console.log("createBlog...")
 		BlogService.createBlog(blog).then(function(d) {
 			alert("Thank you for creating message")
-			$location.path("/login")
+			$location.path("/viewblog")
 		}, function(errResponse) {
 			console.error('Error while creating Blog.');
 		});
@@ -99,12 +100,30 @@ app.controller('BlogController',['$scope', '$location', 'BlogService','$rootScop
         }
         deleteblog(id);
     }
- 
+    function accept(ViewBlogs) {
+		{
+			console.log('accept the Blog details')
+				
+			BlogService.accept(ViewBlogs);
+			console.log(ViewBlogs)
+			$location.path("/admin")
+		}
+		
+	};
+	function rejectBlog(ViewBlogs){
+    	BlogService.deleteBlogRequest(viewBlogs.blogid).then(function(d) {
+			self.deleteBlogRequestId = d;		    			
+			console.log(self.deleteBlogRequestId);
+    			$location.path("/admin")
+    	}, function(errResponse){
+                console.error('Error while deleting BlogRequest');
+            });
+    };
     function get(blog) {
     	$scope.bc=blog;
 		console.log($scope.bc);
 		$rootScope.blog=$scope.bc;
-		$location.path("ViewBlog");
+		$location.path("/ViewBlog");
     	
 	}
     function adminGet(blogs){
