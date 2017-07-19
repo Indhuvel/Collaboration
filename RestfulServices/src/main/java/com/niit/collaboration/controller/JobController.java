@@ -1,7 +1,10 @@
 package com.niit.collaboration.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,9 +15,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.niit.collaboration.dao.JobDAO;
+import com.niit.collaboration.model.AppliedJobs;
 import com.niit.collaboration.model.Job;
 
 @RestController
@@ -22,6 +28,10 @@ public class JobController {
 
 	@Autowired
 	private JobDAO jobDAO;
+	@Autowired
+	private AppliedJobs appliedJobsDAO;
+	@Autowired
+	HttpSession httpSession;
 	
 	public JobDAO getJobDAO() {
 		return jobDAO;
@@ -31,6 +41,14 @@ public class JobController {
 		this.jobDAO = jobDAO;
 	}
 	
+	public AppliedJobs getAppliedJobsDAO() {
+		return appliedJobsDAO;
+	}
+
+	public void setAppliedJobsDAO(AppliedJobs appliedJobsDAO) {
+		this.appliedJobsDAO = appliedJobsDAO;
+	}
+
 	@GetMapping("/job")
 	public ResponseEntity<List<Job>> getJobs() {
 		List<Job> listjob = jobDAO.list();
@@ -78,5 +96,52 @@ public class JobController {
 
 		return new ResponseEntity(job, HttpStatus.OK);
 	}
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	 @GetMapping("/getJobDetails/{jobid}")
+		public ResponseEntity<List<Job>>JobDetails(@PathVariable int jobid) {
+		
+		 Job job = jobDAO.getJobDetails(jobid);
+		 if (job == null) {
+			 return new ResponseEntity("No Job found for ID " + jobid, HttpStatus.NOT_FOUND);
+		 }
+		 return new ResponseEntity(job, HttpStatus.OK);
+			}
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@RequestMapping(value = "/getMyAppliedJobs/", method = RequestMethod.GET)
+     public ResponseEntity<List<AppliedJobs>> getMyAppliedJobs(@PathVariable int id) {
+		
+		List<AppliedJobs> listappliedJobs = new ArrayList <AppliedJobs>();
+		if(listappliedJobs == null||listappliedJobs.isEmpty()){
+			return new ResponseEntity("No appliedJob found for ID " + id, HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<List<AppliedJobs>>(listappliedJobs,HttpStatus.OK);
+			
+		}
+	@RequestMapping(value = "/applyForJob/{jobid}", method = RequestMethod.POST)
+	public ResponseEntity<AppliedJobs> applyForJob(@PathVariable("jobid") int jobid) {
+		
+		String userid = (String) httpSession.getAttribute("userid");
 
-}
+		if (isUserAppliedForTheJob(userid, jobid) ==false)
+		{
+		appliedJobsDAO.setJobid(jobid);
+		appliedJobsDAO.setUserid(userid);
+		appliedJobsDAO.setStatus("N");
+		appliedJobsDAO.setDateTime(new Date(System.currentTimeMillis()));
+			
+	}
+		return new ResponseEntity<AppliedJobs>(appliedJobsDAO,HttpStatus.OK);
+	}
+	private boolean isUserAppliedForTheJob(String userID, int jobID) {
+
+		if (jobDAO.getJobApplication(userID, jobID) == null) {
+			return false;
+		}
+
+		return true;
+
+	}
+
+	
+	}
+
