@@ -2,6 +2,7 @@ package com.niit.collaboration.dao;
 
 import java.util.List;
 
+import com.niit.collaboration.model.AppliedJobs;
 import com.niit.collaboration.model.Job;
 
 public interface JobDAO {
@@ -14,5 +15,10 @@ public interface JobDAO {
 	
 	public Job getByJobid(int jobId);
 	
-	public Job getByJobcategory(String jobCategory);
+	public List<Job>getMyAppliedJobs(String email);
+	
+	 public Job getJobDetails(int jobId);
+	 
+	 public AppliedJobs getJobApplication(String userID, int jobID);
+		
 }

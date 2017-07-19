@@ -4,11 +4,13 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.niit.collaboration.dao.JobDAO;
+import com.niit.collaboration.model.AppliedJobs;
 import com.niit.collaboration.model.Job;
 
 @Repository("JobDAO")
@@ -43,10 +45,30 @@ public class JobDAOImpl implements JobDAO {
 
 		return JobId;
 	}
+	
 	@Transactional
-	public Job getByJobcategory(String jobCategory) {
-		Job JobCategory = (Job) sessionFactory.getCurrentSession().get(Job.class, jobCategory);
-
-		return JobCategory;
+	public Job getJobDetails(int jobid) {
+		
+		Job job =  (Job)sessionFactory.getCurrentSession().get(Job.class, jobid);
+		return job;
 	}
+
+	@Transactional
+	public List<Job> getMyAppliedJobs(String email) {
+		
+		String hql = "from AppliedJobs where email ='"+ email +"'";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		
+		return query.list();
+		
+	}
+	@Transactional
+	public AppliedJobs getJobApplication(String userID, int jobID) {
+		
+		String hql = "from AppliedJobs where userid ='"+ userID + "' and jobid='"+jobID + "'";
+		
+		return (AppliedJobs) sessionFactory.getCurrentSession().createQuery(hql).uniqueResult();
+		
+	}
+
 }
