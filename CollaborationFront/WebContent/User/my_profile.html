@@ -1,6 +1,6 @@
 
 <body>
-	<div class="generic-container" ng-controller="UserController as ctrl">
+	<div class="generic-container" ng-controller="UserController as uc">
 
  Current User :  {{currentUser}}
 
@@ -9,14 +9,14 @@
 					<span class="lead">My Profile </span>
 				</div>
 				<div class="formcontainer">
-					<form ng-submit="ctrl.update()" name="myForm"
+					<form ng-submit="uc.update()" name="myForm"
 						class="form-horizontal">
 
 							<div class="row">
 							<div class="form-group col-md-12">
 								<label class="col-md-2 control-lable" for="id">ID</label>  
 								<div class="col-md-7">
-									<input type="text"  ng-model= "currentUser.id"  id="id"
+									<input type="text"  ng-model= "currentUser.userid"  id="userid"
 										class="userid form-control input-sm"
 										placeholder="Enter your ID" required ng-minlength="3" />
 								</div>
@@ -28,7 +28,7 @@
 							<div class="form-group col-md-12">
 								<label class="col-md-2 control-lable" for="name">Name</label>  
 								<div class="col-md-7">
-									<input type="text"  ng-model= "currentUser.name"   id="name"
+									<input type="text"  ng-model= "currentUser.username"   id="username"
 										class="userid form-control input-sm"
 										placeholder="Enter your Name" required ng-minlength="3" />
 								</div>
@@ -65,7 +65,7 @@
 							<div class="form-group col-md-12">
 								<label class="col-md-2 control-lable" for="mobilel">Mobile</label>
 								<div class="col-md-7">
-									<input type="tel" ng-model= "currentUser.mobile"   id="mobile"
+									<input type="tel" ng-model= "currentUser.contact"   id="contact"
 										class="mobile form-control input-sm"
 										placeholder="Enter your contact number" required />
 

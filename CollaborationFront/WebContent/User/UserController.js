@@ -43,7 +43,7 @@ app.controller('UserController',['$scope','UserService','$location','$rootScope'
 								UserService.createUser(user)
 										.then(function(d) {
 													alert("Thank you for registration")
-													$location.path('/login')
+													$location.path('/')
 												},
 												function(errResponse) {
 													console.error('Error while creating User.');
@@ -120,23 +120,29 @@ app.controller('UserController',['$scope','UserService','$location','$rootScope'
 														self.user.password = "";
 														$location.path('/');
 
-													} else { // valid
-														// credentials
-														console.log("Valid credentials. Navigating to home page")
+													} else {
+														console.log("Valid credentials. Navigating to admin page")
+														
+														console.log('Current user : '+ self.user)
+														$rootScope.currentUser = self.user
+														console.log($rootScope.currentUser)
+														$cookieStore.put('currentUser',self.user);
+														
 														self.userLoggedIn = "true"
 														if (self.user.role == "admin") {
 															console.log("You are admin")
 															 $location.path('/admin')
-															//self.fetchAllUsers();
+															
+														}else if (self.user.role == "employee") {
+															console.log("You are employee")
+															 $location.path('/blog')
+															
 														}
-
-														console.log('Current user : '+ self.user)
-														$rootScope.currentUser = self.user
-														$cookieStore.put('currentUser',self.user);
+														else{
 														
-														/*$http.defaults.headers.common['Authorization'] = 'Basic '
-																+ $rootScope.currentUser;*/
+														 $location.path('/')
 														
+														}
 													}
 
 												},
@@ -152,7 +158,7 @@ app.controller('UserController',['$scope','UserService','$location','$rootScope'
 								$rootScope.currentUser = {};
 								$cookieStore.remove('currentUser');
 								UserService.logout()
-								$location.path('/login');
+								$location.path('/');
 
 							}
 

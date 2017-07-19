@@ -6,7 +6,9 @@
 <title>Insert title here</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <script
@@ -25,7 +27,8 @@
 <script type="text/javascript" src="Job/JobService.js"></script>
 <script type="text/javascript" src="Forum/ForumController.js"></script>
 <script type="text/javascript" src="Forum/ForumService.js"></script>
-
+<script type="text/javascript" src="Friend/FriendController.js"></script>
+<script type="text/javascript" src="Friend/FriendService.js"></script>
 </head>
 <body ng-app="myApp" ng-controller="UserController as uc">
 <br>
@@ -63,21 +66,21 @@
 					<li class="dropdown"><a data-toggle="dropdown" href="#">Friends<span
 							class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="#">Search Friend</a></li>
-							<li><a href="#">View Friends</a></li>
+							<li><a href="#!search_friend">Search Friend</a></li>
+							<li><a href="#!view_friend">View Friends</a></li>
 						</ul></li>
 					<li class="dropdown"><a data-toggle="dropdown" href="#">Jobs<span
 							class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="#!search_job">Search Job</a></li>
-							<li><a href="#!job" ng-show="currentUser.role=='ADMIN'">Post Job</a></li>
-							<li><a href="#!view_applied_jobs">View Job</a></li>
+							<li><a href="#!job" ng-show="currentUser.role == 'admin'">Post Job</a></li>
+							<li><a href="#!view_job_details">View Job</a></li>
 						</ul></li>
 						<li class="dropdown"><a data-toggle="dropdown" href="#">Forums<span
 							class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="#!viewforum">View</a></li>
-							<li><a href="#!forum"ng-show="currentUser.role!='ADMIN'">Add</a></li>
+							<li><a href="#!forum"ng-show="currentUser.role!='admin'">Add</a></li>
 						</ul></li>
 					<!-- <li  class="dropdown"><a data-toggle="dropdown" href="#">Chat Forums<span
 							class="caret"></span></a>

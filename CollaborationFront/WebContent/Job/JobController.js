@@ -6,27 +6,22 @@ app	.controller('JobController',['JobService','$location', '$rootScope',
 							var self = this;
 
 							this.job = {
-									jobid : '',jobprofile : '',jobdesc : '',postdate : '',qualification : '',status : ''
+									jobid : '',title : '',companyname : '',email:'',postdate : '',qualification : '',status : '',
 
-								/*errorCode : '',
-								errorMessage : ''*/
-							};
+									errorCode : '',errorMessage : ''};
 							this.jobs = [];
-							
-							this.applyForJob = applyForJob
-
+							 self.get = get;
 							function applyForJob(jobid) {
 								console.log("applyForJob");
 								var currentUser = $rootScope.currentUser
 								console.log("currentUser.id:" + currentUser.id)
-								//if(currentUser) -> not null, not empty and defined
+							
 								
 								if (typeof currentUser.id == 'undefined') 
 									{
 									   alert("Please login to apply for the job")
 	                                     console.log("User not logged in.  Can not apply for job")
-	                                     /*$location
-											.path('/login');*/
+	                                   
 									   return
 									
 									}
@@ -34,16 +29,13 @@ app	.controller('JobController',['JobService','$location', '$rootScope',
 										+ "  applying for job:" + jobid)
 										
 										
-								JobService
-										.applyForJob(jobid)
-										.then(
-												function(data) {
+								JobService.applyForJob(jobid)
+										.then(function(data) {
 													self.job = data;
 													alert(self.job.errorMessage)
 												},
 												function(errResponse) {
-													console
-															.error('Error while applying for job request');
+													console.error('Error while applying for job request');
 												});
 
 							}
@@ -54,7 +46,7 @@ app	.controller('JobController',['JobService','$location', '$rootScope',
 								.then(
 									function(d) {
 								    	self.jobs = d;
-									/* $location.path('/view_friend'); */
+									
 								    	$location.path("/view_applied_jobs")
 								    }, 
 								    
@@ -65,65 +57,31 @@ app	.controller('JobController',['JobService','$location', '$rootScope',
 
 							self.rejectJobApplication = function(userid) {
 						    var jobid =$rootScope.selectedJob.id;
-								JobService.rejectJobApplication(userid,jobid												)
-										.then(
-												function(d) {
+								JobService.rejectJobApplication(userid,jobid)
+										.then(function(d) {
 													self.job = d;
 													alert("You have successfully rejected the job application of the " +
 															"user : " +userid)
 												},
 												function(errResponse) {
-													console
-															.error('Error while rejecting Job application.');
+													console.error('Error while rejecting Job application.');
 												});
 							};
 
-							self.callForInterview = function(userid) {
-								var jobid =$rootScope.selectedJob.id;	
-								JobService
-										.callForInterview(userid,
-												jobid)
-										.then(
-												function(d) {
-													self.job = d;
-													alert("Application status changed as call for interview")
-												},
-												function(errResponse) {
-													console
-															.error('Error while changing the status "call for interview" ');
-												});
-							};
-							self.selectUser = function(userid) {
-								var jobid =$rootScope.selectedJob.id;		
-								JobService
-										.selectUser(userid, jobid)
-										.then(
-												function(d) {
-													self.job = d;
-													alert("Application status sta as selected")
-												},
-												function(errResponse) {
-													console
-															.error('Error while changing the status "select user" ');
-												});
-							};
-
-							//definition of getAllJobs function
+							
+							
 							self.getAllJobs = function() {
 								console.log('calling the method getAllJobs');
-								JobService
-										.getAllJobs()
-										.then(
-												function(d) {
+								JobService.getAllJobs()
+										.then(function(d) {
 													self.jobs = d;
 												},
 												function(errResponse) {
-													console
-															.error('Error while fetching All opend jobs');
+													console.error('Error while fetching All opend jobs');
 												});
 							};
 
-							self.getAllJobs(); // calling getAllJobs function
+							self.getAllJobs();
 
 							self.submit = function() {
 								{
@@ -142,14 +100,12 @@ app	.controller('JobController',['JobService','$location', '$rootScope',
 								});
 							};
 
-							self.getJobDetails = getJobDetails
+							
 
-							function getJobDetails(jobid) {
+							self.getJobDetails =function (jobid) {
 								console.log('get Job details of the id', jobid);
-								JobService
-										.getJobDetails(jobid)
-										.then(
-												function(d) {
+								JobService.getJobDetails(jobid)
+										.then(function(d) {
 													self.job = d;
 													
 													$location.path('/view_job_details');
@@ -159,13 +115,21 @@ app	.controller('JobController',['JobService','$location', '$rootScope',
 															.error('Error while fetching blog details');
 												});
 							};
-
+							function get(job){
+								$scope.jv=job;
+								console.log($scope.jv);
+								$rootScope.viewJob=$scope.jv;
+								console.log('viewJob')
+								$location.path("/view_job_details");
+								
+								
+							};
 							self.reset = function() {
 								console.log('resetting the Job');
 								self.job = {
-										jobid : '',jobprofile : '',jobdesc : '',postdate : '',qualification : '',status : ''
-									/*errorCode : '',
-									errorMessage : ''*/
+										jobid : '',title : '',companyname : '',email:'',postdate : '',qualification : '',status : '',
+
+										errorCode : '',errorMessage : '' 
 								};
 								//$scope.myForm.$setPristine(); // reset Form
 							};

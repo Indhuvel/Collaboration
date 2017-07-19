@@ -123,7 +123,7 @@ app.controller('BlogController',['$scope', '$location', 'BlogService','$rootScop
     	$scope.bc=blog;
 		console.log($scope.bc);
 		$rootScope.blog=$scope.bc;
-		$location.path("/ViewBlog");
+		$location.path("/viewBlog");
     	
 	}
     function adminGet(blogs){

@@ -1,17 +1,23 @@
-<div class="container" ng-controller="JobController as ctrl">
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+xbfddf
+<button type="button"><span style="float: center;">
 
-	<div class="form-group">
-		ID :<label>{{selectedJob.jobid}}</label> <br> 
-		Title: <label>{{selectedJob.title}}</label>
-		Date :<label>{{selectedJob.dateTime}}</label> <br> <br>
-		Description :<label>{{selectedJob.description}}</label>
-		Qualification :<label>{{selectedJob.qualification}}</label>
-		
-		<button type="button"  ng-click="ctrl.applyForJob(selectedJob.jobidid)" 
-			       class="btn btn-warning btn-sm">Apply for job</button>
-		
+<a class="btn btn-info" href="#!job" ng-show="currentUser.role=='ADMIN'">Create New Job</a></span></button>
 
+<div class="col-sm-3 col-sm-offset-1" style="width:600px;heigth:700px;border:5px solid grey; float: left; margin-left: 1.5em;" >
 
-	</div>
+<h3>{{selectedJob.title}}</h3>
+<h5> Created On : <b>{{selectedJob.timeStamp}}</b></h5>
+<h3>Status:{{selectedJob.status}}</h3>
 
+<h2>{{selectedJob.qualification}}... Can Apply</h2>
 </div>
+
+</body>
+</html>

@@ -1,22 +1,22 @@
 
 
-<div ng-controller="FriendController as ctrl">
-	<div ng-repeat="friend in ctrl.friends">
+<div ng-controller="FriendController as fc">
+	<div ng-repeat="friend in fc.friends">
 
 
 		<div ng-show="friend.isOnline=='Y'">
 
-			<a data-target="#myModal" data-toggle="modal" class="MainNavText" data-id={{friend.friendID}}
+			<a data-target="#myModal" data-toggle="modal" class="MainNavText" data-id={{friend.friendid}}
 				id="MainNavHelp"> <span class="glyphicon glyphicon-user "
-				style="color: green"></span> {{friend.friendID}}
+				style="color: green"></span> {{friend.friendid}}
 			</a>
 
 		</div>
 
 		<div ng-show="friend.isOnline=='N'">
-			<a data-target="#myModal" data-toggle="modal" class="MainNavText" data-id={{friend.friendID}}
+			<a data-target="#myModal" data-toggle="modal" class="MainNavText" data-id={{friend.friendid}}
 				id="MainNavHelp"> <span class="glyphicon glyphicon-user "
-				style="color: gray"></span> {{friend.friendID}}
+				style="color: gray"></span> {{friend.friendid}}
 			</a>
 
 		</div>
@@ -46,10 +46,10 @@
 						<span> {{message.message}} </span>
 					</p>
 
-					<form ng-submit="addMessage(friendID)" name="messageForm">
+					<form ng-submit="addMessage(friendid)" name="messageForm">
 						<input type="textarea" rows="4" cols="100"
 							placeholder="new message..." ng-model="message" /><br>
-							<input type="text" ng-model="friendID" value="abbas"> 
+							<input type="text" ng-model="friendid" value="hii"> 
 						<button>Send</button>
 					</form>
 					<hr />

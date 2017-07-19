@@ -18,6 +18,11 @@ app.config(function($routeProvider) {
 			controllerAs: 'ctrl'
 
 	})
+	.when('/myProfile', {
+		templateUrl : 'User/my_profile.html',
+		controller : 'UserController'
+	})
+	
 	.when('/admin', {
 		templateUrl : 'Admin/AdminPage.html'
 
@@ -54,7 +59,21 @@ app.config(function($routeProvider) {
 		controller : 'JobController',
 			controllerAs : 'jc'
 	})
-
+.when('/search_job', {
+		templateUrl : 'Job/search_job.html',
+		controller : 'JobController',
+		controllerAs : 'jc'
+	})
+	.when('/view_job_details', {
+		templateUrl : 'Job/view_job_details.html',
+		controller : 'JobController',
+		controllerAs : 'jc'
+	})
+	.when('/view_applied_jobs', {
+		templateUrl : 'Job/view_applied_jobs.html',
+		controller : 'JobController',
+		controllerAs : 'jc'
+	})
 	.when('/forum', {
 		templateUrl : 'Forum/Forum.html',
 		controller : 'ForumController',
@@ -65,13 +84,26 @@ app.config(function($routeProvider) {
 		controller : 'ForumController',
 			controllerAs : 'fc'
 	})
+	.when('/viewForum', {
+		templateUrl : 'Forum/DetailForum.html',
+		controller : 'ForumController',
+			controllerAs : 'fc'
+	})
     .when('/friend', {
 		templateUrl : 'Friend/friends.html',
 		controller : 'FriendController',
 		controllerAs : 'frc'
 
 	})
-	
+	.when('/search_friend', {
+		templateUrl : 'Friend/search_friend.html',
+		controller : 'FriendController'
+	})
+
+	.when('/view_friend', {
+		templateUrl : 'Friend/view_friend.html',
+		controller : 'FriendController'
+	})
 	.otherwise({
 		resirectTo : '/'
 	});
@@ -82,8 +114,8 @@ app.run( function ($rootScope, $location,$cookieStore, $http) {
 	 $rootScope.$on('$locationChangeStart', function (event, next, current) {
 		 console.log("$locationChangeStart")
 		
-		 var userPages = ['/myProfile','/create_blog','/add_friend','/search_friend','/view_friend', '/viewFriendRequest','/chat']
-		 var adminPages = ["/post_job","/manage_users"]
+		 var userPages = ['/myProfile','/blog','/search_friend','/view_friend']
+		 var adminPages = ["/job","/manage_users"]
 		 
 		
 		 var currentPage = $location.path()

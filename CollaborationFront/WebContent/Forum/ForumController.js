@@ -14,6 +14,9 @@ app.controller('ForumController', ['$scope','ForumService','$location','$rootSco
 	self.forums = [];
 	self.submit = submit;
 	 self.accept = accept;
+	    self.get = get;
+
+	 
 	 self.AcceptedForums = AcceptedForums;
 	 self.notAcceptedForums = notAcceptedForums;
 	 self.adminGet = adminGet;
@@ -105,6 +108,15 @@ app.controller('ForumController', ['$scope','ForumService','$location','$rootSco
 			}
 			
 		};
+		function get(forum){
+			
+				$scope.fv=forum;
+				
+				console.log($scope.fv);
+			
+				$rootScope.viewForumm=$scope.fv;
+				$location.path("/viewForum");
+		};
 		function adminGet(forums){
 			$scope.fvv=forums;
 			console.log($scope.fvv);
@@ -120,7 +132,7 @@ app.controller('ForumController', ['$scope','ForumService','$location','$rootSco
 			};
 
 			 function reset() {
-				self.forum = {forumid:'',forumname : '',forumcontent : '',userid:'',username:'',errorCode : '',
+				self.forum = {forumid:'null',forumname : '',forumcontent : '',userid:'',username:'',errorCode : '',
 						errorMessage : ''};
  };
 			 } ]);

@@ -36,8 +36,9 @@ box-shadow: 0 0 10px #ccc;
 <div class="abc" ng-repeat="jo in jc.jobs"> 
 <h3><span ng-bind="jo.title"></span></h3>
 <h6>Company Name:<span ng-bind="jo.companyname"></span></h6>
-<h3><span ng-bind="jo.qualification"></span></h3><h3><span ng-bind="jo.status"></span></h3>
-<!-- <h3>Knowledge Reqd:<span ng-bind="jo.technicalKnowledge"></span></h3> -->
+<h3><span ng-bind="jo.qualification"></span></h3>
+<!--<h3><span ng-bind="jo.status"></span></h3>
+ <h3>Knowledge Reqd:<span ng-bind="jo.technicalKnowledge"></span></h3> -->
  <h6>Created On:<span ng-bind="jo.timeStamp"></span></h6>
 <a href="" ng-click="jc.get(jo)"><input type="button" name="button"  value="Read More"/></a>
 <hr>

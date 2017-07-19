@@ -7,11 +7,10 @@ app.controller('FriendController', ['UserService','$scope', 'FriendService','$lo
    '$rootScope',function(UserService,$scope, FriendService,$location,$routeParams,$rootScope) {
 	console.log("FriendController...")
           var self = this;
-          self.friend={id:'',userID:'',friendID:'',status:'', errorCode:'', errorMessage:''};
+          self.friend={userid:'',friendid:'',username:'',status:'', friendname:'',isOnline:'',errorCode:'', errorMessage:''};
           self.friends=[];
           
-          self.user = {	id : '', name : '',	mobile : '',
-  				address : '',email : '', isOnline:'',role : '',
+          self.user = {	userid : '', username : '',	contact : '',address : '',email : '', isOnline:'',role : '',
   				errorMessage : ''
   			};
   			self.users = [];
@@ -20,32 +19,17 @@ app.controller('FriendController', ['UserService','$scope', 'FriendService','$lo
   			
   			  				
 
-  		         self.getMyFriendRequests = function(){
-  		              FriendService.getMyFriendRequests()
-  		                      .then(
-  		                             function(d)
-  		                             {
-  		                            	 self.friends = d;
-  		                            	 
-  		                            	 $location.path="/viewFriendRequest";
-  		                            	 
-  		                             },
-  		                              function(errResponse){
-  		                                   console.error('Error while updating Friend.');
-  		                              } 
-  		                  );
-  		          };
+  		       
   		 
           
-         self.sendFriendRequest=sendFriendRequest
+     
          
          function sendFriendRequest(friendID)
          {
 
        	  console.log("->sendFriendRequest :"+friendID)
              FriendService.sendFriendRequest(friendID)
-                 .then(
-                              function(d) {
+                 .then(function(d) {
                                    self.friend = d;
                                    
                                   alert("Friend Request : " + self.friend.errorMessage)
@@ -54,19 +38,16 @@ app.controller('FriendController', ['UserService','$scope', 'FriendService','$lo
                                    console.error('Error while sending friend request');
                                }
                       );
-         
-        	 
          }
           
              
           self.getMyFriends = function(){
         	  console.log("Getting my friends")
               FriendService.getMyFriends()
-                  .then(
-                               function(d) {
+                  .then(function(d) {
                                     self.friends = d;
                                     console.log("Got the friends list"+ self.friends)
-                                     	/* $location.path('/view_friend');*/
+                                     
                                },
                                 function(errResponse){
                                     console.error('Error while fetching Friends');
@@ -77,8 +58,7 @@ app.controller('FriendController', ['UserService','$scope', 'FriendService','$lo
        
          self.updateFriendRequest = function(friend, id){
               FriendService.updateFriendRequest(friend, id)
-                      .then(
-                              self.fetchAllFriends, 
+                      .then(self.fetchAllFriends, 
                               function(errResponse){
                                    console.error('Error while updating Friend.');
                               } 
@@ -87,8 +67,7 @@ app.controller('FriendController', ['UserService','$scope', 'FriendService','$lo
  
          self.acceptFriendRequest = function(id){
               FriendService.acceptFriendRequest(id)
-                      .then(
-                              self.fetchAllFriends, 
+                      .then( self.fetchAllFriends, 
                               function(errResponse){
                                    console.error('Error while acceptFriendRequest');
                               } 
@@ -97,8 +76,7 @@ app.controller('FriendController', ['UserService','$scope', 'FriendService','$lo
           
           self.rejectFriendRequest = function(id){
               FriendService.rejectFriendRequest(id)
-                      .then(
-                              self.fetchAllFriends, 
+                      .then( self.fetchAllFriends, 
                               function(errResponse){
                                    console.error('Error while rejectFriendRequest');
                               } 
@@ -107,8 +85,7 @@ app.controller('FriendController', ['UserService','$scope', 'FriendService','$lo
           
           self.unFriend = function(id){
               FriendService.unFriend(id)
-                      .then(
-                              self.fetchAllFriends, 
+                      .then(self.fetchAllFriends, 
                               function(errResponse){
                                    console.error('Error while unFriend ');
                               } 

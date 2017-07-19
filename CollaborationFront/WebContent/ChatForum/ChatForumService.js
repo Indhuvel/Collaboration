@@ -7,7 +7,7 @@ app.service("ChatForumService", function($q, $timeout,$rootScope) {
 		stomp : null
 	}
 	
-	//Simple Text Oriented Message Protocol
+
 	var messageIds = [];
 
 	service.RECONNECT_TIMEOUT = 30000;
@@ -15,20 +15,20 @@ app.service("ChatForumService", function($q, $timeout,$rootScope) {
 	service.CHAT_TOPIC = "/topic/message";
 	service.CHAT_BROKER = "/app/chat_forum";
 
-	service.receive = function() { // this receive method will call from
-									// ChtforumController
+	service.receive = function() { 
+									
 		console.log("receive")
 		console.log("listener.promise:" + listener.promise)
 		return listener.promise;
 	};
 
-	service.send = function(message) { // this send method will call from
-										// ChtforumController
+	service.send = function(message) { 
+										
 		console.log("send")
 		var id = Math.floor(Math.random() * 1000000);
 
-		socket.stomp.send(service.CHAT_BROKER, { // send(destination, {},
-													// body);
+		socket.stomp.send(service.CHAT_BROKER, { 
+													
 			priority : 9
 		}, JSON.stringify({
 			id : id,
@@ -43,11 +43,9 @@ app.service("ChatForumService", function($q, $timeout,$rootScope) {
 
 	var reconnect = function() {
 		console.log("reconnect")
-		$timeout(function() { // wrapper window.setTimeout :: $timeout([fn],
-								// [delay], [invokeApply], [Pass]);
-			initialize(); // invokeApply true or false : false -> skip dirty
-							                    // checking
-		}, this.RECONNECT_TIMEOUT); // Pass - addition parameters if any
+		$timeout(function() { 
+			initialize(); 
+		}, this.RECONNECT_TIMEOUT);
 	};
 
 	var getMessage = function(data) {
@@ -57,20 +55,16 @@ app.service("ChatForumService", function($q, $timeout,$rootScope) {
 		var out = {};
 		out.message = message.message;
 		out.time = new Date(message.time);
-		out.userID = message.userID;
-		/* if (_.contains(messageIds, message.id)) { */
-		/*
-		 * if (_.includes (messageIds, message.id)) { out.self = true;
-		 * messageIds = _.remove(messageIds, message.id); }
-		 */
+		out.userID = message.userid;
+		
 		console.log("data:" + data)
 		console.log("message:" + message.message)
 		console.log("time :" + message.time)
-		console.log("userID :" + message.userID)
+		console.log("userID :" + message.userid)
 
 		return out;
 	};
-	// //subscribe(destination, callback, { id: mysubid });
+	
 	var startListener = function() {
 		console.log("startListener")
 		socket.stomp.subscribe(service.CHAT_TOPIC, function(data) {
@@ -82,18 +76,12 @@ app.service("ChatForumService", function($q, $timeout,$rootScope) {
 		console.log("initialize")
 		socket.client = new SockJS(service.SOCKET_URL);
 		socket.stomp = Stomp.over(socket.client);
-		socket.stomp.connect({}, startListener); // connect(headers,
-													// connectCallback,
-													// errorCallback);
+		socket.stomp.connect({}, startListener); 
 		socket.stomp.onclose = reconnect; //
 	};
 
-	initialize(); // to call first time excplicitly.
+	initialize(); 
 	return service;
 });
 
-/*
- * var headers = { login: 'mylogin', passcode: 'mypasscode', // additional
- * header 'client-id': 'my-client-id' };
- */
 
