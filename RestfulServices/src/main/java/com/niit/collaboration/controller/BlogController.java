@@ -65,9 +65,9 @@ public class BlogController {
 	}
 
 	@RequestMapping(value ="/deleteBlog/{blogid}", method = RequestMethod.DELETE)
-	public ResponseEntity<String> deleteBlog(@PathVariable("blogid") int blogid) {
+	public ResponseEntity<Integer> deleteBlog(@PathVariable("blogid") int blogid) {
 		blogDAO.delete(blogid);
-		return new ResponseEntity<String>("Deleted Blog Successfully", HttpStatus.OK);
+		return new ResponseEntity<Integer>(HttpStatus.OK);
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })

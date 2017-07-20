@@ -59,7 +59,7 @@ public class ForumController {
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@DeleteMapping("/forum/{forumid}")
-	public ResponseEntity deleteForum(@PathVariable int forumid) {
+	public ResponseEntity deleteForum(@PathVariable("forumid") int forumid) {
 		Forum forum=forumDAO.getByForumid(forumid);
  		if (forum==null) {
 			return new ResponseEntity("No Forum found for ID " + forumid, HttpStatus.NOT_FOUND);
