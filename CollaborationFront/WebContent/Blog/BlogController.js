@@ -111,7 +111,7 @@ app.controller('BlogController',['$scope', '$location', 'BlogService','$rootScop
 		
 	};
 	function rejectBlog(ViewBlogs){
-    	BlogService.deleteBlogRequest(viewBlogs.blogid).then(function(d) {
+    	BlogService.deleteBlog(ViewBlogs.blogid).then(function(d) {
 			self.deleteBlogRequestId = d;		    			
 			console.log(self.deleteBlogRequestId);
     			$location.path("/admin")

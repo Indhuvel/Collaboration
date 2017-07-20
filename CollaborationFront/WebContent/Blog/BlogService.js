@@ -75,9 +75,9 @@ app.service('BlogService', ['$http', '$q', function($http, $q){
 					return $q.reject(errResponse);
 				});
 			};
-		    function deleteBlog(id) {
+		    function deleteBlog(blogid) {
 		    	console.log("Deleting Blog Request");
-				return $http.delete(BASE_URL + '/deleteBlog/'+id).then(function(response){
+				return $http.delete(BASE_URL + '/deleteBlog/'+blogid).then(function(response){
 						
 					return response.data;
 						},function(errResponse) {

@@ -1,24 +1,43 @@
 <!DOCTYPE html>
+
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
-.fa {
-    font-size: 50px;
-    cursor: pointer;
-    user-select: none;
-}
-.fa:hover {
-  color: #3e4b60;
-}
-</style>
+    .pb-cmnt-container {
+        font-family: Lato;
+        margin-top: 30px;
+    }
 
+    .pb-cmnt-textarea {
+       
+        
+        height: 80px;
+        width: 40%;
+        border: 2px solid cyan;
+    }
+</style>
 </head>
-<body>bgxfb
-<div><h4 style= "margin: 0px 0px 10px 0px; margin-left: 85%;"><a href="#!forum" ng-show="currentUser.name">Create New Forum</a></h4></div>
-<div><h1 style="margin-top: 2em;">{{ViewForum.forumname}}</h1>
-<h4>{{ViewForum.forumcontent}}</h4></div>
+<body>
+<button type="button"><span style="float: center;">
+   <a class="btn btn-info" href="#!forum" ng-show="currentUser.username">Create New Forum</a></span></button>
+   
+   <div class="col-sm-3 col-sm-offset-1" style="width:600px;heigth:600px;border:5px solid brown; float: left; margin-left: 1.5em;" >
+ 
+   <h3>{{viewForumm.forumname}}</h3>
+<h5>Created by : <b>{{viewForumm.username}}</b> </h5>
+ <h5>Created On : <b>{{viewForumm.timeStamp}}</b></h5>
+<h4>{{viewForumm.forumcontent}}</h4>
+
+ <form>
+<div class="container pb-cmnt-container">
+ <textarea placeholder="Write your comment here!" class="pb-cmnt-textarea"></textarea>
+</div>
+<input type="submit" value="Comment">
+
+</form>
+  </div>
+
 </body>
 </html>

@@ -3,24 +3,41 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
-.fa {
-    font-size: 50px;
-    cursor: pointer;
-    user-select: none;
-}
-.fa:hover {
-  color: #3e4b60;
-}
-</style>
+    .pb-cmnt-container {
+        font-family: Lato;
+        margin-top: 30px;
+    }
 
+    .pb-cmnt-textarea {
+       
+        
+        height: 80px;
+        width: 40%;
+        border: 2px solid cyan;
+    }
+</style>
 </head>
 <body>
-<div><h4 style= "margin: 0px 0px 10px 0px; margin-left: 85%;"><a href="#!blog" ng-show="currentUser.name">Create New Blog</a></h4></div>
-<div><h1 style="margin-top: 2em;">{{ViewBlog.title}}</h1>
-<h5>Created by : <b>{{Viewblog.username}}</b> | Created On : <b>{{Viewblog.timeStamp}}</b></h5>
-<h4>{{Viewblog.description}}</h4></div>
+<button type="button">
+   <a class="btn btn-info" href="#!blog" ng-show="currentUser.username" >Create New Blog</a></button>
 
+<div class="col-sm-3 col-sm-offset-1" style="width:600px;heigth:600px;border:5px solid purple; float: left; margin-left: 1.5em;" >
+
+
+<h3>{{blog.title}}</h3>
+<h5>Created by : <b>{{blog.username}}</b> </h5>
+ <h5>Created On : <b>{{blog.timeStamp}}</b></h5>
+<h4>{{blog.description}}</h4>
+  
+  <form>
+<div class="container pb-cmnt-container">
+ <textarea placeholder="Write your comment here!" class="pb-cmnt-textarea"></textarea>
+</div>
+<input type="submit" value="Comment">
+
+</form>
+
+</div>
 </body>
 </html>

@@ -20,6 +20,7 @@ app.controller('ForumController', ['$scope','ForumService','$location','$rootSco
 	 self.AcceptedForums = AcceptedForums;
 	 self.notAcceptedForums = notAcceptedForums;
 	 self.adminGet = adminGet;
+	 self.rejectForum = rejectForum;
 	 
 	 fetchAllForums();
 		AcceptedForums();
@@ -71,7 +72,7 @@ app.controller('ForumController', ['$scope','ForumService','$location','$rootSco
 				console.error('Error while creating Forum.');
 			});
 		};
-		
+		/*
 		function reject(id){
 			console.log("reject...")
 			var reason = prompt("Please enter the reason");
@@ -82,7 +83,16 @@ app.controller('ForumController', ['$scope','ForumService','$location','$rootSco
 				alert(self.forum.errorMessage)
 
 			}, null);
-		};
+		};*/
+		function rejectForum(viewForums){
+			ForumService.deleteForum(viewForums.forumid).then(function(d) {
+				self.deleteForumRequestId = d;		    			
+				console.log(self.deleteForumRequestId);
+	    			$location.path("/admin")
+	    	}, function(errResponse){
+	                console.error('Error while deleting BlogRequest');
+	            });
+	    };
 
 		function updateForum(currentForum){
 			console.log("updateForum...")

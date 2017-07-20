@@ -183,7 +183,7 @@ app.controller('UserController',['$scope','UserService','$location','$rootScope'
 							};
 
 							self.reset = function() {
-								self.user = {userid : '',username : '',password : '',contact : '',address : '',isOnline : '',role : '',
+								self.user = {userid : 'null',username : '',password : '',contact : '',address : '',isOnline : '',role : '',
 									errorCode : '',errorMessage : ''
 								};
 								/*$scope.myForm.$setPristine();*/ // reset Form

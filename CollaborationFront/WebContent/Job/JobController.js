@@ -1,7 +1,7 @@
 'use strict';
 
-app	.controller('JobController',['JobService','$location', '$rootScope',
-						function(JobService,  $location, $rootScope) {
+app	.controller('JobController',['JobService','$location', '$rootScope','$scope',
+						function(JobService,  $location, $rootScope,$scope) {
 							console.log("JobController...")
 							var self = this;
 
@@ -11,6 +11,7 @@ app	.controller('JobController',['JobService','$location', '$rootScope',
 									errorCode : '',errorMessage : ''};
 							this.jobs = [];
 							 self.get = get;
+							 
 							function applyForJob(jobid) {
 								console.log("applyForJob");
 								var currentUser = $rootScope.currentUser
@@ -111,8 +112,7 @@ app	.controller('JobController',['JobService','$location', '$rootScope',
 													$location.path('/view_job_details');
 												},
 												function(errResponse) {
-													console
-															.error('Error while fetching blog details');
+													console.error('Error while fetching blog details');
 												});
 							};
 							function get(job){

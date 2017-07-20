@@ -115,7 +115,7 @@ app.run( function ($rootScope, $location,$cookieStore, $http) {
 		 console.log("$locationChangeStart")
 		
 		 var userPages = ['/myProfile','/blog','/search_friend','/view_friend']
-		 var adminPages = ["/job","/manage_users"]
+		 var adminPages = ["/manage_users"]
 		 
 		
 		 var currentPage = $location.path()
