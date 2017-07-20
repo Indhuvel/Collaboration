@@ -37,6 +37,7 @@ public class JobDAOTestCase {
 		job.setQualification("BE");
 	   	job.setCompanyname("CTS");
 	   	job.setTitle("software developer");
+	   	job.setSkills("skills");
 	   	jobDAO.saveOrUpdate(job);
 
 	}

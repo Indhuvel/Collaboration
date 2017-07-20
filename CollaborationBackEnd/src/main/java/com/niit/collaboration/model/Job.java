@@ -24,6 +24,7 @@ public class Job {
 	private String companyname;
 	private String qualification;
 	private String status;
+	private String skills;
 	private String email;
 	private String timeStamp = new SimpleDateFormat("yyyy/MM/dd_HH:mm:ss").format(Calendar.getInstance().getTime());
 
@@ -88,6 +89,13 @@ public class Job {
 	public void setTimeStamp(String timeStamp) {
 		this.timeStamp = timeStamp;
 	}
+	public String getSkills() {
+		return skills;
+	}
+	public void setSkills(String skills) {
+		this.skills = skills;
+	}
+	
 
     
 }
