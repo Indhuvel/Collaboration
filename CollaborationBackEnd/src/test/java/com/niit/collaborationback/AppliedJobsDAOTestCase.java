@@ -35,6 +35,8 @@ public class AppliedJobsDAOTestCase {
 		appliedJobs.setCompanyname("companyname");
 		appliedJobs.setQualification("qualification");
 		appliedJobs.setEmail("mani@hotmail.in");
+		appliedJobs.setStatus("active");
+		appliedJobs.setUsername("mani");
 		appliedJobsDAO.saveOrUpdate(appliedJobs);
 	}
 }

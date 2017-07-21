@@ -26,11 +26,13 @@ public class AppliedJobs {
 	private String companyname;
 	private String qualification;
 	private String email;
-	private String userid;
-	private String status;
+	private int userid;
+	private String username;
+    private String status;
 	private String timeStamp = new SimpleDateFormat("yyyy/MM/dd_HH:mm:ss").format(Calendar.getInstance().getTime());
 	@Column(name="date_time")
 	private Date dateTime;
+	
 	
 	public int getId() {
 		return id;
@@ -74,10 +76,10 @@ public class AppliedJobs {
 	public void setTimeStamp(String timeStamp) {
 		this.timeStamp = timeStamp;
 	}
-	public String getUserid() {
+	public int getUserid() {
 		return userid;
 	}
-	public void setUserid(String userid) {
+	public void setUserid(int userid) {
 		this.userid = userid;
 	}
 	public String getStatus() {
@@ -91,6 +93,12 @@ public class AppliedJobs {
 	}
 	public void setDateTime(Date dateTime) {
 		this.dateTime = dateTime;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	
 	

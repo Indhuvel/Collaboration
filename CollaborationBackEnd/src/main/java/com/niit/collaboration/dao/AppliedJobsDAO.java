@@ -3,21 +3,21 @@ package com.niit.collaboration.dao;
 import java.util.List;
 
 import com.niit.collaboration.model.AppliedJobs;
-import com.niit.collaboration.model.Job;
 
 public interface AppliedJobsDAO {
 
-	public List<AppliedJobs>list();
+public List<AppliedJobs> getByJobId(int jobid);    
 	
-	public AppliedJobs saveOrUpdate(AppliedJobs jobs);
+	public List<AppliedJobs> getByUserName(String username); 
 	
-	public List<AppliedJobs> getByEmail(String email);
+	public List<AppliedJobs> getByUserId(int userid);
 	
-	public  List<AppliedJobs> getByUserid(int userid);
+	public void saveOrUpdate(AppliedJobs ajob);
+
+	public AppliedJobs getByAJobId(String jobid);
 	
-	public AppliedJobs getByTitle(String title);
 	
-	public AppliedJobs getByJobid(String jobid);
-	
-	public List<Job>getMyAppliedJobs(String email);
+	public void delete(String id);
+
+	public List<AppliedJobs> list();
 }
