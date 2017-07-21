@@ -60,8 +60,7 @@ public class BlogController {
 		blog.setUserid(user.getUserid());
 		blog.setUsername(user.getUsername());
 		blogDAO.saveOrUpdate(blog);
-		blogDAO.insert(blog);
-		return new ResponseEntity<String>("Successfully Inserted", HttpStatus.OK);
+		return new ResponseEntity(blog, HttpStatus.OK);
 	}
 
 	@RequestMapping(value ="/deleteBlog/{blogid}", method = RequestMethod.DELETE)

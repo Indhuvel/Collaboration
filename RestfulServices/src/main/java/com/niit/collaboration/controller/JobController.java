@@ -29,7 +29,7 @@ public class JobController {
 	@Autowired
 	private JobDAO jobDAO;
 	@Autowired
-	private AppliedJobs appliedJobsDAO;
+	private AppliedJobs appliedJobs;
 	@Autowired
 	HttpSession httpSession;
 	
@@ -41,12 +41,13 @@ public class JobController {
 		this.jobDAO = jobDAO;
 	}
 	
-	public AppliedJobs getAppliedJobsDAO() {
-		return appliedJobsDAO;
+	
+	public AppliedJobs getAppliedJobs() {
+		return appliedJobs;
 	}
 
-	public void setAppliedJobsDAO(AppliedJobs appliedJobsDAO) {
-		this.appliedJobsDAO = appliedJobsDAO;
+	public void setAppliedJobs(AppliedJobs appliedJobs) {
+		this.appliedJobs = appliedJobs;
 	}
 
 	@GetMapping("/job")
@@ -117,31 +118,6 @@ public class JobController {
 		return new ResponseEntity<List<AppliedJobs>>(listappliedJobs,HttpStatus.OK);
 			
 		}
-	@RequestMapping(value = "/applyForJob/{jobid}", method = RequestMethod.POST)
-	public ResponseEntity<AppliedJobs> applyForJob(@PathVariable("jobid") int jobid) {
-		
-		String userid = (String) httpSession.getAttribute("userid");
-
-		if (isUserAppliedForTheJob(userid, jobid) ==false)
-		{
-		appliedJobsDAO.setJobid(jobid);
-		appliedJobsDAO.setUserid(userid);
-		appliedJobsDAO.setStatus("N");
-		appliedJobsDAO.setDateTime(new Date(System.currentTimeMillis()));
-			
-	}
-		return new ResponseEntity<AppliedJobs>(appliedJobsDAO,HttpStatus.OK);
-	}
-	private boolean isUserAppliedForTheJob(String userID, int jobID) {
-
-		if (jobDAO.getJobApplication(userID, jobID) == null) {
-			return false;
-		}
-
-		return true;
-
-	}
-
 	
 	}
 
