@@ -5,41 +5,44 @@ app	.controller('JobController',['JobService','$location', '$rootScope','$scope'
 							console.log("JobController...")
 							var self = this;
 
-							this.job = {
+							self.job = {
 									jobid : '',title : '',companyname : '',email:'',postdate : '',qualification : '',status : '',
-
-									errorCode : '',errorMessage : ''};
+                                     errorCode : '',errorMessage : ''};
 							this.jobs = [];
-							 self.get = get;
-							 
-							function applyForJob(jobid) {
-								console.log("applyForJob");
-								var currentUser = $rootScope.currentUser
-								console.log("currentUser.id:" + currentUser.id)
 							
+							self.appjob={id : '',jobid:'',title : '',companyname : '',email:'',userid : '',username:'',qualification : '',status : '',timeStamp:''};
+							
+							this.appjobs=[];
+							
+							 self.get = get;
+							
+							    
+							self.applyJobs = function (job) {
+									console.log("AllapplyJobs...")
+									self.appjob.jobid=job.jobid;
+									console.log(self.appjob.jobid)
+									self.appjob.companyname=job.title;
+									self.appjob.userid=$rootScope.currentUser.userid;
+									self.appjob.username=$rootScope.currentUser.username;
+									JobService.applyjobs(self.appjob).then(function(d) {
+														
+														console.log("working")
+													},function(errResponse) {  
+														console.error('Error while applying Jobs');
+													});
+								};
 								
-								if (typeof currentUser.id == 'undefined') 
-									{
-									   alert("Please login to apply for the job")
-	                                     console.log("User not logged in.  Can not apply for job")
-	                                   
-									   return
-									
-									}
-								console.log("->userID :" + currentUser.id
-										+ "  applying for job:" + jobid)
-										
-										
-								JobService.applyForJob(jobid)
-										.then(function(data) {
-													self.job = data;
-													alert(self.job.errorMessage)
-												},
-												function(errResponse) {
-													console.error('Error while applying for job request');
+							
+							self.BringAllAppJobs= function () {
+								console.log("Applied Jobs List...")
+								JobService.BringAllAppJobs().then(function(d) {
+													self.appjobs = d;
+													console.log(self.jobs)
+												},function(errResponse) {  
+													console.error('Error while fetching  applied Jobs');
 												});
-
-							}
+							};
+							
 
 							self.getMyAppliedJobs = function() {
 								console.log('calling the method getMyAppliedJobs');

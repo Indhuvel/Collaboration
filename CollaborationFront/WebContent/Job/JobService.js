@@ -8,15 +8,24 @@ app.service('JobService', ['$http', '$q','$rootScope', function($http, $q,$rootS
 		
     return {
          
-		applyForJob: function(jobid) {
-                    return $http.post(BASE_URL+"/applyForJob/"+jobid)
-                            .then(function(response){
-                                        return response.data;
-                                    }, 
-                                   null
-                            );
-            },
-            
+    	applyjobs: function(job) {
+			console.log("calling apply jobs ")
+			return $http.post(BASE_URL + '/appliedjobs', job).then(
+					function(response) {
+						return response.data;
+					}, null);
+		},               
+
+		               
+				
+		BringAllAppJobs:function () {
+					console.log("calling bringAlljobs ")
+					return $http.get(BASE_URL + '/allappliedjobs/').then(
+							function(response) {
+								return response.data;
+							}, null);
+				},
+
             getJobDetails: function(jobid) {
             	console.log("Getting job details of " + jobid)
                 return $http.get(BASE_URL+"/getJobDetails/" + jobid)

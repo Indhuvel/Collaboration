@@ -64,20 +64,19 @@ app.controller('BlogController',['$scope', '$location', 'BlogService','$rootScop
 		});
 	};
 
-    function deleteblog(id){
-    	BlogService.deleteBlog(id)
-            .then(
-            		fetchAllBlogs,
+   /* function deleteblog(blogid){
+    	BlogService.deleteBlog(blogid)
+            .then(fetchAllBlogs,
             function(errResponse){
                 console.error('Error while deleting jobs');
             }
         );
-    }
+    }*/
     
-    function edit(id){
-        console.log('id to be edited', id);
+    function edit(blogid){
+        console.log('id to be edited',blogid);
         for(var i = 0; i < self.blogs.length; i++){
-            if(self.blogs[i].blogid === id) {
+            if(self.blogs[i].blogid === blogid) {
                 self.blog = angular.copy(self.blogs[i]);
                 break;
             }
@@ -85,20 +84,19 @@ app.controller('BlogController',['$scope', '$location', 'BlogService','$rootScop
     }
     function updateBlog(blog, id){
     	BlogService.updateBlog(blog, id)
-            .then(
-            		fetchAllBlogs,
+            .then(fetchAllBlogs,
             function(errResponse){
                 console.error('Error while updating jobs');
             }
         );
     }
  
-    function remove(id){
-        console.log('id to be deleted', id);
-        if(self.blog.blogid === id) {//clean form if the user to be deleted is shown there.
+    function remove(blogid){
+        console.log('id to be deleted', blogid);
+        if(self.blog.blogid === blogid) {
             reset();
         }
-        deleteblog(id);
+        deleteblog(blogid);
     }
     function accept(ViewBlogs) {
 		{

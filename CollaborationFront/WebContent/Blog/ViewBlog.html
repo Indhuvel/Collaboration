@@ -17,8 +17,8 @@
                     <h3 class="panel-title">
                         <span class="glyphicon glyphicon-list-alt"></span>  Recent Posts
                     
-                     <a style="float:right" ng-click="blog.edit(u.id)"><span class="glyphicon glyphicon-pencil editContent"></span></a>
-                   <a style="float:right" ng-click="blog.remove(u.id)" ><span class="glyphicon glyphicon-trash editContent"></span></a> </h3>
+                     <a style="float:right"  ng-show="currentUser.userid == u.userid" ng-click="blog.edit(u.blogid)"><span class="glyphicon glyphicon-pencil editContent"></span></a>
+                   <a style="float:right"  ng-show="currentUser.userid == u.userid" ng-click="blog.remove(u.blogid)" ><span class="glyphicon glyphicon-trash editContent"></span></a> </h3>
   
                 </div>
                 <div class="panel-body">
@@ -36,7 +36,7 @@
                                     <span ng-bind="u.description"></span>   </p>
                             </div>
                         
-                               <span class="blog-date">July 03, 2017</span>
+                               <span class="blog-date" ng-bind="u.timeStamp" ></span>
                     </ul>
                     <a href="#" class="btn btn-default btn-block">More Blog Posts »</a>
                 </div>

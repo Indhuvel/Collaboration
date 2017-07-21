@@ -1,7 +1,7 @@
 'use strict';
  
 app.service('BlogService', ['$http', '$q', function($http, $q){
-	console.log("blogService...")
+	console.log("BlogService...")
     var BASE_URL = 'http://localhost:8086/RestfulServices';
 
 	 var factory = {
@@ -43,9 +43,9 @@ app.service('BlogService', ['$http', '$q', function($http, $q){
 						}, null);
 			};
 			
-			function createBlog(Blog) {
+			function createBlog(blog) {
 				console.log("calling create Blog")
-				return $http.post(BASE_URL+'/insertBlog', Blog) // 1
+				return $http.post(BASE_URL+'/insertBlog',blog) 
 				.then(function(response) {
 					return response.data;
 				}, function(errResponse) {
@@ -57,7 +57,7 @@ app.service('BlogService', ['$http', '$q', function($http, $q){
 		 
 			function updateBlog(Blog) {
 				console.log("calling fetchAllBlogs ")
-				return $http.put(BASE_URL+'/updateBlog/', Blog) 
+				return $http.put(BASE_URL+'/updateBlog/',Blog) 
 				.then(function(response) {
 					return response.data;
 				}, function(errResponse) {
@@ -67,7 +67,7 @@ app.service('BlogService', ['$http', '$q', function($http, $q){
 			};
 			function accept(Blog) {
 				console.log("calling accept Blogs ")
-				return $http.put(BASE_URL +'/acceptBlog', Blog) 
+				return $http.put(BASE_URL +'/acceptBlog',Blog) 
 				.then(function(response) {
 					return response.data;
 				}, function(errResponse) {
