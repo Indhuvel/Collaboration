@@ -61,9 +61,9 @@ public class AppliedJobsDAOImpl implements AppliedJobsDAO {
 		return ajobListByID;
 	}
 
-	public void delete(String id) {
+	public void delete(int jobid) {
 		AppliedJobs ajobDelete = new AppliedJobs();
-		//ajobDelete.setId(id);
+		ajobDelete.setJobid(jobid);
 		sessionFactory.getCurrentSession().delete(ajobDelete);
 		
 	}

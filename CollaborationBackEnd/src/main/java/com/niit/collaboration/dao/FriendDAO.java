@@ -6,19 +6,21 @@ import com.niit.collaboration.model.Friend;
 
 public interface FriendDAO {
 	
-	public List<Friend>list();
+	public List<Friend> list();
+
+	public List<Friend> getByUser(int userid);
+
+	public List<Friend> getByName(String username);
+
+	public List<Friend> getByFriendName(String username);
+
+	public void save(Friend friend);
 
 	public Friend saveOrUpdate(Friend friend);
-	
-	public void delete (int friendId);
-	
-	public Friend getByFriendid(int friendId);
-	
-	public List<Friend> getByFriendRequestList(int userid);
 
-	public List<Friend> FriendList(int userid);
+	public List<Friend> getByFriendAccepted(String friendname);
 
-	public List<Friend> getByFriendName(String name);
-	
-	public List<Friend> getByFriendAccepted(String name);
+   public List<Friend> list(int userid);
+
+public void delete(int friendid);
 }

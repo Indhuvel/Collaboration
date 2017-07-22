@@ -1,5 +1,8 @@
 package com.niit.collaboration.model;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -24,7 +27,7 @@ public class User {
 	private String role;
 	private String status;
 	private String isonline;
-	
+	private String timeStamp = new SimpleDateFormat("yyyy/MM/dd_HH:mm:ss").format(Calendar.getInstance().getTime());
 	public int getUserid() {
 		return userid;
 	}
@@ -78,6 +81,12 @@ public class User {
 	}
 	public void setIsonline(String isonline) {
 		this.isonline = isonline;
+	}
+	public String getTimeStamp() {
+		return timeStamp;
+	}
+	public void setTimeStamp(String timeStamp) {
+		this.timeStamp = timeStamp;
 	}
 
 

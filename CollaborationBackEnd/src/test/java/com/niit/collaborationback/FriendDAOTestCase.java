@@ -34,6 +34,8 @@ public class FriendDAOTestCase {
 	public void createFriendTestCase() {
 
 		friend.setStatus("friend");
+		friend.setIsOnline("ON");
+		friend.setFriendname("jeni");
 	   	friendDAO.saveOrUpdate(friend);
 
 	}

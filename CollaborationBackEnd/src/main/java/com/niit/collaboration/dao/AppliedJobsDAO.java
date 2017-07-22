@@ -17,7 +17,7 @@ public List<AppliedJobs> getByJobId(int jobid);
 	public AppliedJobs getByAJobId(String jobid);
 	
 	
-	public void delete(String id);
+	public void delete(int jobid);
 
 	public List<AppliedJobs> list();
 }

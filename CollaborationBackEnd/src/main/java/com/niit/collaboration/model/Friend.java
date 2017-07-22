@@ -20,9 +20,7 @@ public class Friend {
 	private int userid;
 	private String username;
     private String friendname;
-	
 	private String isOnline;
-	
 	private Date lastSeen;
 	private String status;
 	
