@@ -71,13 +71,14 @@ public ResponseEntity getaJobs(@PathVariable("ajobid") String jobid) {
 
 	return new ResponseEntity(ajob, HttpStatus.OK);
 }
+@SuppressWarnings({ "rawtypes", "unchecked" })
 @PostMapping(value = "/appliedjobs")
 public ResponseEntity applyJob(@RequestBody AppliedJobs appliedJobs, HttpSession session) {
 	User user = (User) session.getAttribute("user");
 	appliedJobs.setDateTime(new Date());
 	appliedJobs.setUserid(user.getUserid());
 	appliedJobs.setEmail(user.getEmail());
-	
+	appliedJobs.setTimeStamp(user.getTimeStamp());
 	appliedJobsDAO.saveOrUpdate(appliedJobs);
 
 	return new ResponseEntity(appliedJobs, HttpStatus.OK);
@@ -89,7 +90,7 @@ public ResponseEntity deleteaJob(@PathVariable String id) {
 		if (ajob==null) {
 		return new ResponseEntity("No Job found for ID " + id, HttpStatus.NOT_FOUND);
 	}
-		appliedJobsDAO.delete(id);
+		//appliedJobsDAO.delete(id);
 	return new ResponseEntity(id, HttpStatus.OK);
 
 }
