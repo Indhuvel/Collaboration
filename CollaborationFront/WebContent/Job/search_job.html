@@ -1,4 +1,4 @@
-
+<div class="container" ng-controller="JobController as jc">
 		
 	<div class="form-group"></div>
 
@@ -16,7 +16,7 @@
 			<a href = "#"  ng-click="jc.getJobDetails(job.jobid)"> Get job details
 			</a>	
 			    &nbsp; &nbsp;&nbsp;  
-			    <button type="button"  ng-click="jc.applyJobs(viewJob)" 
+			    <button type="button"  name="submit" value="applyjob" ng-click="jc.applyJobs(viewJob)"
 			       class="btn btn-warning btn-sm">Apply for job</button>
 			  </p>
 
@@ -27,4 +27,4 @@
 		</fieldset>
 	</div>
 
-
+</div>

@@ -71,6 +71,18 @@
 </div>
 </div>
 </div></div></div></div>
+<div ng-controller="JobController as jc">
+<p>Jobs Applied By Users</p>
+<div ng-init="jc.BringAllAppJobs()">
+     <div ng-repeat="jo in jc.appjobs"> 
+      
+ <h3> Job Title:{{jo.companyname}} </h3>
+<h5>Applied By:{{jo.username}} </h5><h5>Send On: <span ng-bind="jo.timeStamp"></span> </h5> 
 
+       
+        </div>
+        </div>
+        
+</div>
 </body>
 </html>
