@@ -23,7 +23,7 @@ app.factory('FriendService', ['$http', '$q','$rootScope', function($http, $q,$ro
 
 		    function fetchAllFriends() {
 					console.log("calling fetchAllFriends ")
-					return $http.get(BASE_URL + '/friends').then(
+					return $http.get(BASE_URL + '/friend').then(
 							function(response) {
 								return response.data;
 							}, null);

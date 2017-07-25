@@ -44,9 +44,9 @@ app.controller('FriendController', ['UserService','$scope', 'FriendService','$lo
 
 			self.createFriend = function (friend) {
 				console.log("createJob...")
-				FriendService.createFriend(friend).then(function(d) {
+				FriendService.createFriend(friendUser).then(function(d) {
 									alert("Thank you for creating friend")
-									$location.path("/index")
+									$location.path("/")
 								},
 								function(errResponse) {
 									console.error('Error while creating Friend.');
@@ -72,8 +72,7 @@ app.controller('FriendController', ['UserService','$scope', 'FriendService','$lo
 			
 			function update() {
 				{
-					console.log('Update the Friend details',
-							$rootScope.currentFriend);
+					console.log('Update the Friend details',$rootScope.currentFriend);
 					updateFriend($rootScope.currentFriend);
 				}
 	 			reset();
@@ -85,7 +84,7 @@ app.controller('FriendController', ['UserService','$scope', 'FriendService','$lo
 				console.log($scope.frnd);
 				$rootScope.viewFriend=$scope.frnd;
 				console.log('viewFriend')
-				$location.path("/view_Friend");
+				$location.path("/view_friend");
 				
 				
 			};
@@ -168,8 +167,8 @@ app.controller('FriendController', ['UserService','$scope', 'FriendService','$lo
 			};
             
  
-          self.fetchAllUsers();  //calling the method fetchAllUsers
-          self.getMyFriends();   //calling the method getMyFriends
+          self.fetchAllUsers();  
+          self.getMyFriends();   
  
          self.submit = function() {
 				{
@@ -180,6 +179,6 @@ app.controller('FriendController', ['UserService','$scope', 'FriendService','$lo
 			};
 			
 			self.reset = function() {
-				self.friend ={userid:'',friendid:'',username:'',status:'', friendname:'',isOnline:'',errorCode:'', errorMessage:''};
+				self.friend ={id:'',userid:'',friendid:'',username:'',status:'', friendname:'',isOnline:'',errorCode:'', errorMessage:''};
 			};
       }]);

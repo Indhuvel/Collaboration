@@ -59,7 +59,7 @@ app.config(function($routeProvider) {
 		controller : 'JobController',
 			controllerAs : 'jc'
 	})
-.when('/search_job', {
+   .when('/search_job', {
 		templateUrl : 'Job/search_job.html',
 		controller : 'JobController',
 		controllerAs : 'jc'
@@ -95,15 +95,15 @@ app.config(function($routeProvider) {
 		controllerAs : 'frc'
 
 	})
-	.when('/search_friend', {
-		templateUrl : 'Friend/search_friend.html',
-		controller : 'FriendController'
+	
+   .when('/find', {
+		templateUrl : 'User/PendingReq.html',
+		controller : 'UserController',
+		controllerAs : 'uc'
+		
+			
 	})
-
-	.when('/view_friend', {
-		templateUrl : 'Friend/view_friend.html',
-		controller : 'FriendController'
-	})
+	
 	.otherwise({
 		resirectTo : '/'
 	});

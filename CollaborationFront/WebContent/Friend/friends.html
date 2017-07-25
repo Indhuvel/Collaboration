@@ -1,68 +1,15 @@
-
-
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>Received Requests</h1>
 <div ng-controller="FriendController as fc">
-	<div ng-repeat="friend in fc.friends">
-
-
-		<div ng-show="friend.isOnline=='Y'">
-
-			<a data-target="#myModal" data-toggle="modal" class="MainNavText" data-id={{friend.friendid}}
-				id="MainNavHelp"> <span class="glyphicon glyphicon-user "
-				style="color: green"></span> {{friend.friendid}}
-			</a>
-
-		</div>
-
-		<div ng-show="friend.isOnline=='N'">
-			<a data-target="#myModal" data-toggle="modal" class="MainNavText" data-id={{friend.friendid}}
-				id="MainNavHelp"> <span class="glyphicon glyphicon-user "
-				style="color: gray"></span> {{friend.friendid}}
-			</a>
-
-		</div>
-	</div>
-
-
-</div>
-
-
-
-<!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-	<div class="modal-dialog modal-sm">
-
-		Modal content
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Private Chat</h4>
-			</div>
-			<div class="modal-body">
-				<div ng-controller="ChatController" class="container">
-
-					<p ng-repeat="message in messages | orderBy:'time':false"
-						class="message">
-						<time>{{message.time | date:'HH:mm'}}</time>
-						<span> {{message.message}} </span>
-					</p>
-
-					<form ng-submit="addMessage(friendid)" name="messageForm">
-						<input type="textarea" rows="4" cols="100"
-							placeholder="new message..." ng-model="message" /><br>
-							<input type="text" ng-model="friendid" value="hii"> 
-						<button>Send</button>
-					</form>
-					<hr />
-
-				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			</div>
-		</div>
-
-	</div>
-</div>
-
-
-
+<div ng-init="fc.fetchAllUserId()">
+<div ng-repeat="user in fc.friendss" >
+<h1><span ng-bind="user.username"></span></h1>
+</div></div></div>
+</body>
+</html>

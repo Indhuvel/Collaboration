@@ -56,8 +56,9 @@
 
 <h3>{{viewJob.qualification}}</h3>
 <h3>{{viewJob.skills}}</h3>
-<button type="button" name="submit" value="applyjob" class="btn btn-success btn-icon" ng-click="jc.applyJobs(viewJob)" ><i class="fa fa-check"></i> Apply</button>
-
+<!-- <button type="button" name="submit"  value="{{!jc.viewJob.id? 'Apply' : 'Applied'}}" class="btn btn-success btn-icon" ng-click="jc.applyJobs(viewJob)" ><i class="fa fa-check"></i> Apply</button>
+ -->
+ <input type="submit"  value="{{!jc.viewJob.jobid? 'Apply' : 'Applied'}}" class="btn btn-primary btn-sm"  ng-click="jc.applyJobs(viewJob)" ng-disabled="myForm.$invalid">
 </div>
 
  
