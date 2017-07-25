@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -64,9 +65,9 @@ public class FriendController {
 		User user = (User) session.getAttribute("user");   
 		friend.setUserid(user.getUserid());
 		friend.setUsername(user.getUsername());
-		friend.setStatus("P");
-	//	friend.setFriendId(friendUser.get());
-	//	friend.setFriendName(friendUser.get());
+		friend.setStatus("R");
+		friend.setFriendid(friendUser.getUserid());
+		friend.setFriendname(friendUser.getUsername());
 		friend.setIsOnline("TRUE");
 	
 		friendDAO.save(friend);
@@ -83,15 +84,15 @@ public class FriendController {
 		
 		return new ResponseEntity(friend, HttpStatus.OK);
 	}
-	
-	/*@DeleteMapping("/friends/{id}")
-	public ResponseEntity deleteFriend(@PathVariable int id) {
-		Friend friend=friendDAO.getByFriendId(id);
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@DeleteMapping("/friends/{friendid}")
+	public ResponseEntity deleteFriend(@PathVariable int friendid) {
+		Friend friend=friendDAO.getByFriendId(friendid);
  		if (friend==null) {
-			return new ResponseEntity("No friend found for ID " + id, HttpStatus.NOT_FOUND);
+			return new ResponseEntity("No friend found for ID " + friendid, HttpStatus.NOT_FOUND);
 		}
- 		friendDAO.delete(id);
-		return new ResponseEntity(id, HttpStatus.OK);
+ 		friendDAO.delete(friendid);
+		return new ResponseEntity(friendid, HttpStatus.OK);
 
-	}*/
+	}
 }
