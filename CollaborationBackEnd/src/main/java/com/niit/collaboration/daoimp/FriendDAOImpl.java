@@ -96,12 +96,19 @@ public List<Friend> getByFriendAccepted(String friendname){
 
 		return listFriend;
 	}
-
+	@Transactional
 	public void delete(int friendid) {
 		Friend frnd = new Friend();
 		frnd.setFriendid(friendid);
 		sessionFactory.getCurrentSession().delete(frnd);
 		}
 
+	@Transactional
+	public Friend getByFriendId(int friendid) {
+	
+		Friend friendListByID = (Friend) sessionFactory.getCurrentSession().get(Friend.class, friendid);
 
+		return friendListByID;
+
+	}
   }

@@ -16,6 +16,8 @@ public class Friend {
 
 	@Id
 	@GeneratedValue
+	private int id;
+	
 	private int friendid;
 	private int userid;
 	private String username;
@@ -24,6 +26,14 @@ public class Friend {
 	private Date lastSeen;
 	private String status;
 	
+	
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public int getFriendid() {
 		return friendid;
 	}
