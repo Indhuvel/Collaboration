@@ -99,18 +99,27 @@ app.controller('UserController',['$scope','UserService','FriendService','$locati
 									
 									
 								};
-							self.AcceptedFriendCurrentUser = function() {
-								$rootScope.loginUser =$rootScope.currentUser;
-								console.log("GetAllAcceptedFriendCurrentUser...")
-								FriendService.fetchAcceptedFriends($rootScope.loginUser.name).then(function(d) {
-													self.accFriend = d;
-													
-													console.log(self.accFriend)
-												},function(errResponse) {  
-													console.error('Error while fetching Accepted list');
-												});
-							};
-							
+						
+								self.AcceptedFriendCurrentUser = function() {
+									$rootScope.loginUser =$rootScope.currentUser;
+									console.log("GetAllAcceptedFriendCurrentUser...")
+									FriendService.fetchAcceptedFriends($rootScope.loginUser.username).then(function(d) {
+														self.accFriend = d;													
+														console.log(self.accFriend)
+														FriendService.fetchAcceptedFriends1($rootScope.loginUser.username).then(function(d) {
+															self.accFriend1 = d;													
+															console.log(self.accFriend)
+																
+														},function(errResponse) {  
+															console.error('Error while fetching Accepted list');
+														});
+														
+														
+													},function(errResponse) {  
+														console.error('Error while fetching Accepted list');
+													});
+								};
+								
 							self.deleteFriendRequest = function(req){
 						    	FriendService.deleteFriendRequest(req.id).then(function(d) {
 									self.deleteFriendRequestid = d;		    			

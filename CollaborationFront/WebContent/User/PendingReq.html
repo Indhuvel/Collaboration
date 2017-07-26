@@ -40,7 +40,7 @@
 <div  ng-repeat="req in uc.reqFriend" ng-if="req.username != currentUser.username">
 <nav style="center">
 <table>
-<th><h1><span ng-bind="req.friendname"></span>  </h1></th>
+<th><h1><span ng-bind="req.username"></span>  </h1></th>
 <tr>
 <td><a href="" ng-click="uc.acceptFriend(req)"><button type="button" class="button"">Accept</button></a></td>
 <td><a href="" ng-click="uc.deleteFriendRequest(req)"><button type="button" class="button"">Reject</button></a></td>
@@ -54,11 +54,20 @@
 <div  ng-repeat="acc in uc.accFriend">
 <nav style="center">
 <table>
+<th><h1><span ng-bind="acc.username"></span>  </h1></th>
+<tr>
+</tr>
+</table>
+</nav>
+</div>
+<div  ng-repeat="acc in uc.accFriend1">
+<nav style="center">
+<table>
 <th><h1><span ng-bind="acc.friendname"></span>  </h1></th>
 <tr>
 </tr>
 </table>
 </nav>
-</div></div></div>
+</div></div>
 </body>
 </html>
