@@ -25,4 +25,6 @@ public interface FriendDAO {
     public void delete(int friendid);
 
     public Friend getByFriendId(int friendid);
+    
+    public List<Friend> getByFriendAccepted1(String name);
 }

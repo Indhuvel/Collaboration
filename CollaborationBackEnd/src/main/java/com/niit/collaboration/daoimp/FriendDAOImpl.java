@@ -45,10 +45,9 @@ public class FriendDAOImpl implements FriendDAO  {
 @Transactional
 public List<Friend> getByName(String username) {
 	Session session=sessionFactory.openSession();
-	
-	String hql = "from Friend where username ='" + username + "'";
+
+	String hql = "from Friend where friendname =" + "'" + username + "' and status = " + "'R'";
 	org.hibernate.Query query = sessionFactory.getCurrentSession().createQuery(hql);
-	@SuppressWarnings("unchecked")
 	List<Friend> frien=query.list();
 	session.close();
 	return frien;
@@ -110,5 +109,13 @@ public List<Friend> getByFriendAccepted(String friendname){
 
 		return friendListByID;
 
+	}
+	@Transactional
+	public List<Friend> getByFriendAccepted1(String name) {
+		String hql = "from Friend where username =" + "'" + name + "' and status = " + "'A'";
+		org.hibernate.Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		@SuppressWarnings("unchecked")
+		List<Friend> listFriend = (List<Friend>) query.list();
+		return listFriend;
 	}
   }
