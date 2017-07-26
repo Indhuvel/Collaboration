@@ -58,7 +58,15 @@ public class FriendController {
 		return friendDAO.getByFriendAccepted(friendname);
 		
 	}
-	
+	@GetMapping("/friendsAccepted1/{name}")  
+	public List<Friend> getByFriendAccepted1(@PathVariable("name") String name) {
+		
+		
+		List<Friend> friendList1 = friendDAO.getByFriendAccepted1(name);
+		
+		return friendList1;
+		
+	}
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@PostMapping("/friends")
 	public ResponseEntity createFriend(@RequestBody User friendUser, HttpSession session) {
