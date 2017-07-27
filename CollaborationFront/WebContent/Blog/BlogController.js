@@ -16,6 +16,7 @@ app.controller('BlogController',['$scope', '$location', 'BlogService','$rootScop
     self.adminGet = adminGet;
     self.accept = accept;
     self.rejectBlog = rejectBlog;
+    self.editandupdateBlog=editandupdateBlog;
     
     fetchAllBlogs();
     AcceptedBlogs();
@@ -72,25 +73,14 @@ app.controller('BlogController',['$scope', '$location', 'BlogService','$rootScop
             }
         );
     }*/
-    
-    function edit(blogid){
-        console.log('id to be edited',blogid);
-        for(var i = 0; i < self.blogs.length; i++){
-            if(self.blogs[i].blogid === blogid) {
-                self.blog = angular.copy(self.blogs[i]);
-                break;
-            }
-        }
-    }
-    function updateBlog(blog, id){
-    	BlogService.updateBlog(blog, id)
-            .then(fetchAllBlogs,
-            function(errResponse){
-                console.error('Error while updating jobs');
-            }
-        );
-    }
- 
+	function editandupdateBlog(blog){
+		
+		console.log(blog);
+		$rootScope.blog=blog; // rootscope name MUST be blog only then it can be mapped with front end
+		console.log(self.blog);
+		$location.path("/blog");
+		
+};
     function remove(blogid){
         console.log('id to be deleted', blogid);
         if(self.blog.blogid === blogid) {

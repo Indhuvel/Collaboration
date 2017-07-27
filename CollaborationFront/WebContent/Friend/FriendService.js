@@ -57,7 +57,7 @@ app.factory('FriendService', ['$http', '$q','$rootScope', function($http, $q,$ro
 					};
 					function fetchAcceptedFriends1(friendname) {
 						console.log("calling fetchBy User name ")
-						return $http.get(BASE_URL + '/friendsAccepted1/' +friendame).then(
+						return $http.get(BASE_URL + '/friendsAccepted1/' +friendname).then(
 								function(response) {
 									return response.data;
 								}, null);
