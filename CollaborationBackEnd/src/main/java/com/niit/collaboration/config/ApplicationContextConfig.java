@@ -21,7 +21,6 @@ import com.niit.collaboration.dao.EventDAO;
 import com.niit.collaboration.dao.ForumDAO;
 import com.niit.collaboration.dao.FriendDAO;
 import com.niit.collaboration.dao.JobDAO;
-import com.niit.collaboration.dao.MychatDAO;
 import com.niit.collaboration.dao.UserDAO;
 import com.niit.collaboration.daoimp.AppliedJobsDAOImpl;
 import com.niit.collaboration.daoimp.BlogDAOImpl;
@@ -31,7 +30,6 @@ import com.niit.collaboration.daoimp.EventDAOImpl;
 import com.niit.collaboration.daoimp.ForumDAOImpl;
 import com.niit.collaboration.daoimp.FriendDAOImpl;
 import com.niit.collaboration.daoimp.JobDAOImpl;
-import com.niit.collaboration.daoimp.MychatDAOImpl;
 import com.niit.collaboration.daoimp.UserDAOImpl;
 import com.niit.collaboration.model.AppliedJobs;
 import com.niit.collaboration.model.Blog;
@@ -88,7 +86,7 @@ public class ApplicationContextConfig {
 		sessionBuilder.addAnnotatedClass(Forum.class);
 		sessionBuilder.addAnnotatedClass(Job.class);
 		sessionBuilder.addAnnotatedClass(Friend.class);
-		sessionBuilder.addAnnotatedClass(Mychat.class);
+	//	sessionBuilder.addAnnotatedClass(Mychat.class);
 		sessionBuilder.addAnnotatedClass(Comment.class);
 		sessionBuilder.addAnnotatedClass(Event.class);
 		sessionBuilder.addAnnotatedClass(AppliedJobs.class);
@@ -132,12 +130,12 @@ public class ApplicationContextConfig {
 	public FriendDAO getFriendDAO(SessionFactory sessionFactory) {
 		return new FriendDAOImpl(sessionFactory);
 	}
- 
+ /*
 	@Autowired(required = true)
 	@Bean(name = "MychatDAO")
 	public MychatDAO getMychatDAO(SessionFactory sessionFactory) {
 		return new MychatDAOImpl(sessionFactory);
-	}
+	}*/
 	@Autowired(required = true)
 	@Bean(name = "CommentDAO")
 	public CommentDAO getCommentDAO(SessionFactory sessionFactory) {

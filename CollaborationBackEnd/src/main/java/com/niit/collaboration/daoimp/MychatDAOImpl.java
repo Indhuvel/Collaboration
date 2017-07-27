@@ -1,4 +1,4 @@
-package com.niit.collaboration.daoimp;
+/*package com.niit.collaboration.daoimp;
 
 import java.util.List;
 
@@ -82,3 +82,4 @@ public class MychatDAOImpl implements MychatDAO {
 
 	
 }
+*/

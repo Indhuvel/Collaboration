@@ -1,4 +1,4 @@
-package com.niit.collaboration.dao;
+/*package com.niit.collaboration.dao;
 
 import java.util.List;
 
@@ -22,3 +22,4 @@ public interface MychatDAO {
 	
 
 }
+*/

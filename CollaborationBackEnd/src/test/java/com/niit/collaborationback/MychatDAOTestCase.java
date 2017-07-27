@@ -1,4 +1,4 @@
-package com.niit.collaborationback;
+/*package com.niit.collaborationback;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -40,4 +40,4 @@ public class MychatDAOTestCase {
 		mychatDAO.saveOrUpdate(mychat);
 
 	}
-  }
+  }*/

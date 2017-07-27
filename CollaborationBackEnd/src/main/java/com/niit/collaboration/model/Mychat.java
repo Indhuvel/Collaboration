@@ -65,5 +65,9 @@ public class Mychat {
 		this.timeStamp = timeStamp;
 	}
 	
+	@Override
+	public String toString() {
+		return "Chat [message=" + message + ", to=" + receiver + "]";
+	}
 	
 }
