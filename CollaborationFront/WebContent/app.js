@@ -99,11 +99,12 @@ app.config(function($routeProvider) {
    .when('/find', {
 		templateUrl : 'User/PendingReq.html',
 		controller : 'UserController',
-		controllerAs : 'uc'
-		
-			
+		controllerAs : 'uc'	
 	})
-	
+	 .when('/chat',{
+		templateUrl:'Chat/Chat.html',
+		controller:'ChatController'
+	})
 	.otherwise({
 		resirectTo : '/'
 	});
